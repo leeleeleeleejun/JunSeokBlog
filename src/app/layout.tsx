@@ -18,18 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="flex justify-between items-center h-[80px] w-[75%] m-auto">
+        <header className="flex justify-between items-center h-[80px] max-w-[900px] m-auto">
           <nav className="flex justify-between w-[30%]">
-            <Link href="/">LOGO🏎️</Link>
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
             <Link href="/timer">Timer</Link>
           </nav>
           <button>다크모드</button>
         </header>
-        <hr />
-        <main className="w-[75%] m-auto">{children}</main>
-        <footer className=" text-center">footer</footer>
+        <hr className="mb-[40px]" />
+        <main className="max-w-[900px] m-auto">{children}</main>
+        <footer className="text-center">footer</footer>
       </body>
     </html>
   );

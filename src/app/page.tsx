@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { getAllPosts, getPostBySlug } from "../lib/api";
+import Category from "@/components/Category";
+import PostItem from "@/components/PostItem";
+
 export default function Home() {
-  //const a = getAllPosts(["slug", "title", "description", "date", "content"]);
+  const posts = getAllPosts(["slug", "title", "description", "date"]);
   // const b = getPostBySlug("test1", [
   //   "slug",
   //   "title",
@@ -9,6 +12,27 @@ export default function Home() {
   //   "date",
   //   "content",
   // ]);
-
-  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>;
+  return (
+    <div className="flex">
+      <div>
+        <div>Category</div>
+        <ul className="flex flex-col rounded">
+          {["one", "two"].map((item, index) => (
+            <Category key={index}>{item}</Category>
+          ))}
+        </ul>
+      </div>
+      <ul>
+        {posts.map((post, index) => (
+          <PostItem
+            key={index}
+            slug={post.slug}
+            title={post.title}
+            description={post.description}
+            date={post.date}
+          />
+        ))}
+      </ul>
+    </div>
+  );
 }
