@@ -1,9 +1,15 @@
 import Link from "next/link";
 
-export default function Category({ children }: { children: string }) {
+export default function Category({
+  children,
+  category,
+}: {
+  children: string;
+  category: string;
+}) {
   return (
     <li>
-      <Link href="/" className="underline px-[10px]">
+      <Link href={`/${category}`} className="underline px-[10px]">
         {children}
       </Link>
     </li>

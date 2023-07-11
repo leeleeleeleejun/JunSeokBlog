@@ -28,7 +28,9 @@ export default function RootLayout({
         </header>
         <hr className="mb-[40px]" />
         <main className="max-w-[900px] m-auto">{children}</main>
-        <footer className="text-center">footer</footer>
+        <footer className="text-center">
+          JunSeok Lee • © 2023 • https://JunSeokBlog.com
+        </footer>
       </body>
     </html>
   );
