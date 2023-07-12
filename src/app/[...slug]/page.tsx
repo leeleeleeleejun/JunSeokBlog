@@ -1,7 +1,6 @@
 import { getPostBySlug } from "../../lib/api";
 import Tag from "@/components/tag";
-import { MDXProvider } from "@mdx-js/react";
-import { useMDXComponents } from "@mdx-js/react";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 export default function Post({ params }: { params: { slug: string[] } }) {
   const [slug, category] = params.slug;
   const post = getPostBySlug(slug, category, [
@@ -16,14 +15,14 @@ export default function Post({ params }: { params: { slug: string[] } }) {
 
   return (
     <div>
-      <h2 className="text-5xl font-bold">{post.title}</h2>
+      <h1 className="text-h1 font-bold my-[0.67em]">{post.title}</h1>
+      <div>{post.date}</div>
       <div>
         {tags.map((item, index) => (
           <Tag key={index}>{item}</Tag>
         ))}
       </div>
-      <div>{post.description}</div>
-      <div>{post.date}</div>
+      <MarkdownRenderer>{post.content}</MarkdownRenderer>
     </div>
   );
 }

@@ -25,7 +25,6 @@ export function getPostBySlug(category: string, slug: string, fields: string[] =
   const fullPath = join(rootPostDirectory, category, `${realSlug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
-
   type Items = {
     [key: string]: string;
   };
