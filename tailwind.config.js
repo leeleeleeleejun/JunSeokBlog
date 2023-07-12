@@ -17,12 +17,16 @@ module.exports = {
         h2: "1.5em",
         h3: "1.17em",
         h4: "1em",
-        h5: "8.83em",
+        h5: "0.83em",
+        // subText: "text-sm",
       },
       colors: {
         codeTagText: "#EB5757",
         codeTagBG: "rgba(135,131,120,0.15)",
         mainGreen: "rgb(74 222 128)",
+      },
+      boxShadow: {
+        list: "3px 3px 10px #eee",
       },
     },
   },

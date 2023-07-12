@@ -1,7 +1,11 @@
+import GitHubIcon from "@/components/icons/GitHubIcon";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import MailIcon from "@/components/icons/MailIcon";
+import VelogIcon from "@/components/icons/VelogIcon";
+import LightIcon from "@/components/icons/lightIcon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,16 +24,46 @@ export default function RootLayout({
       <body className={inter.className}>
         <header className="flex justify-between items-center h-[80px] max-w-[900px] m-auto">
           <nav className="flex justify-between w-[30%]">
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/timer">Timer</Link>
+            <Link
+              href="/"
+              className="text-black hover:text-mainGreen transition-all"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className="text-black hover:text-mainGreen transition-all"
+            >
+              About
+            </Link>
+            <Link
+              href="/timer"
+              className="text-black hover:text-mainGreen transition-all"
+            >
+              Timer
+            </Link>
           </nav>
-          <button>다크모드</button>
+          <button>
+            <LightIcon />
+          </button>
         </header>
         <hr className="mb-[40px]" />
-        <main className="max-w-[900px] m-auto">{children}</main>
-        <footer className="text-center">
-          JunSeok Lee • © 2023 • https://JunSeokBlog.com
+        <main className="max-w-[900px] min-h-[500px] m-auto">{children}</main>
+        <footer className="flex flex-col text-xs text-gray-400 mt-[200px] py-[30px]">
+          <nav className="flex justify-center">
+            <Link href="https://github.com/leeleeleeleejun" target="_blank">
+              <GitHubIcon />
+            </Link>
+            <Link href="mailto:wnstjr6293@gmail.com" target="_blank">
+              <MailIcon />
+            </Link>
+            <Link href="https://velog.io/@leeleeleeleejun" target="_blank">
+              <VelogIcon />
+            </Link>
+          </nav>
+          <p className="mt-[10px] text-center">
+            JunSeok Lee • © 2023 • https://JunSeokBlog.com
+          </p>
         </footer>
       </body>
     </html>

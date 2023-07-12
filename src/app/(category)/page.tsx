@@ -10,6 +10,7 @@ export default function Home() {
     "title",
     "description",
     "date",
+    "readTime",
     "tags",
   ]);
   return (
@@ -22,6 +23,7 @@ export default function Home() {
           title={post.title}
           description={post.description}
           date={post.date}
+          readTime={post.readTime}
         />
       ))}
     </ul>

@@ -1,6 +1,7 @@
 import { getPostBySlug } from "../../lib/api";
 import Tag from "@/components/tag";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import PostInfo from "@/components/PostInfo";
 export default function Post({ params }: { params: { slug: string[] } }) {
   const [slug, category] = params.slug;
   const post = getPostBySlug(slug, category, [
@@ -8,6 +9,7 @@ export default function Post({ params }: { params: { slug: string[] } }) {
     "title",
     "description",
     "date",
+    "readTime",
     "tags",
     "content",
   ]);
@@ -16,8 +18,8 @@ export default function Post({ params }: { params: { slug: string[] } }) {
   return (
     <div>
       <h1 className="text-h1 font-bold my-[0.67em]">{post.title}</h1>
-      <div>{post.date}</div>
-      <div>
+      <PostInfo date={post.date} readTime={post.readTime} />
+      <div className="mt-[10px] mb-[20px]">
         {tags.map((item, index) => (
           <Tag key={index}>{item}</Tag>
         ))}

@@ -1,3 +1,3 @@
 export default function Tag({ children }: { children: string }) {
-  return <span className="px-[5px]">{children}</span>;
+  return <span className="p-[5px]">#{children}</span>;
 }

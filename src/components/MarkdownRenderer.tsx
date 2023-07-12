@@ -23,13 +23,13 @@ export default function MarkdownRenderer({ children }: { children: string }) {
         blockquote: ({ node, ...props }) => (
           <blockquote
             {...props}
-            className="bg-slate-50 my-[1em] mx-[20px] border-l-4 border-mainGreen py-[1rem] pl-[2rem] pr-[1rem]"
+            className="bg-slate-50 my-[1em] border-l-4 border-mainGreen py-[1rem] pl-[2rem] pr-[1rem]"
           />
         ),
         code: ({ inline, node, ...props }) => (
           <code
             {...props}
-            className="text-[85%] text-codeTagText bg-codeTagBG rounded px-[3px]"
+            className="text-[80%] text-codeTagText bg-codeTagBG rounded p-[3px]"
           />
         ),
         ul: ({ ordered, node, ...props }) => (

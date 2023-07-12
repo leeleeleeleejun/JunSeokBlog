@@ -9,7 +9,10 @@ export default function Category({
 }) {
   return (
     <li>
-      <Link href={`/${category}`} className="underline px-[10px]">
+      <Link
+        href={`/${category}`}
+        className="text-black hover:text-mainGreen transition-all underline px-[10px] "
+      >
         {children}
       </Link>
     </li>
