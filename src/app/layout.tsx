@@ -20,10 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
         <header className="flex justify-between items-center h-[80px] max-w-[900px] m-auto">
-          <nav className="flex justify-between w-[30%]">
+          <nav className="flex justify-between w-[30%] min-w-[200px]">
             <Link
               href="/"
               className="text-black hover:text-mainGreen transition-all"
@@ -48,8 +48,10 @@ export default function RootLayout({
           </button>
         </header>
         <hr className="mb-[40px]" />
-        <main className="max-w-[900px] min-h-[500px] m-auto">{children}</main>
-        <footer className="flex flex-col text-xs text-gray-400 mt-[200px] py-[30px]">
+        <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
+          {children}
+        </main>
+        <footer className="flex flex-col text-xs text-gray-400 mt-[250px] py-[30px]">
           <nav className="flex justify-center">
             <Link href="https://github.com/leeleeleeleejun" target="_blank">
               <GitHubIcon />

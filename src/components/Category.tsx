@@ -11,7 +11,7 @@ export default function Category({
     <li>
       <Link
         href={`/${category}`}
-        className="text-black hover:text-mainGreen transition-all underline px-[10px] "
+        className="text-black hover:text-mainGreen transition-all"
       >
         {children}
       </Link>

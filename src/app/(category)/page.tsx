@@ -14,7 +14,7 @@ export default function Home() {
     "tags",
   ]);
   return (
-    <ul>
+    <ul className="w-[100%]">
       {posts.map((post, index) => (
         <PostItem
           key={index}
