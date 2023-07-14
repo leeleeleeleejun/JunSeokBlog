@@ -6,6 +6,7 @@ import Link from "next/link";
 import MailIcon from "@/components/icons/MailIcon";
 import VelogIcon from "@/components/icons/VelogIcon";
 import LightIcon from "@/components/icons/lightIcon";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,31 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        <header className="flex justify-between items-center h-[80px] max-w-[900px] m-auto">
-          <nav className="flex justify-between w-[30%] min-w-[200px]">
-            <Link
-              href="/"
-              className="text-black hover:text-mainGreen transition-all"
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="text-black hover:text-mainGreen transition-all"
-            >
-              About
-            </Link>
-            <Link
-              href="/timer"
-              className="text-black hover:text-mainGreen transition-all"
-            >
-              Timer
-            </Link>
-          </nav>
-          <button>
-            <LightIcon />
-          </button>
-        </header>
+        <Header />
         <hr className="mb-[40px]" />
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
