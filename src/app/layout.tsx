@@ -24,7 +24,6 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
         <Header />
-        <hr className="mb-[40px]" />
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
         </main>

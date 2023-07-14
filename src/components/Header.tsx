@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import LightIcon from "./icons/lightIcon";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -11,22 +12,43 @@ export default function Header() {
     : pathname.startsWith("/timer")
     ? "Timer"
     : "Home";
+  const [position, setPosition] = useState<number>(0);
+  const [visible, setVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const moving = window.scrollY;
+      setVisible(position > moving);
+      setPosition(moving);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [position]);
+
   return (
-    <header className="flex justify-between items-center h-[80px] max-w-[900px] m-auto">
-      <nav className="flex justify-between items-center w-[30%] min-w-[200px]">
-        <NavItem isActive={isActive} href="/">
-          Home
-        </NavItem>
-        <NavItem isActive={isActive} href="/about">
-          About
-        </NavItem>
-        <NavItem isActive={isActive} href="/timer">
-          Timer
-        </NavItem>
-      </nav>
-      <button>
-        <LightIcon />
-      </button>
+    <header
+      className={`sticky border-b-[1px] mb-[40px] transition-all duration-300 bg-white ${
+        visible ? "top-0" : "top-[-80px]"
+      }`}
+    >
+      <div className="flex justify-between items-center h-[80px] max-w-[900px] m-auto px-[10px]">
+        <nav className="flex justify-between items-center w-[30%] min-w-[200px]">
+          <NavItem isActive={isActive} href="/">
+            Home
+          </NavItem>
+          <NavItem isActive={isActive} href="/about">
+            About
+          </NavItem>
+          <NavItem isActive={isActive} href="/timer">
+            Timer
+          </NavItem>
+        </nav>
+        <button>
+          <LightIcon />
+        </button>
+      </div>
     </header>
   );
 }

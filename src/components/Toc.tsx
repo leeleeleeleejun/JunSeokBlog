@@ -1,30 +1,29 @@
 "use client";
 import { getIntersectionObserver } from "@/lib/getIntersectionObserver";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Toc({ TocArray }: { TocArray: string[] }) {
   const [active, setActive] = useState("");
 
   useEffect(() => {
     const observer = getIntersectionObserver(setActive);
-    const headingElements = Array.from(document.querySelectorAll("h2, h3"));
+    const headingElements = Array.from(document.querySelectorAll("h1, h2, h3"));
     headingElements.map((header) => {
       observer.observe(header);
     });
   }, []);
 
   return (
-    <aside className="fixed top-[300px] right-[0] mr-[5%]">
-      <p>On this page</p>
+    <aside className="fixed top-[350px] ml-[1000px] text-sm w-[200px]  max-[1540px]:hidden">
+      <p className="font-semibold mb-[10px]">On this page</p>
       <ul>
-        <li>
-          <Link href={`#`}>Top</Link>
-        </li>
         {TocArray.map((item, index) => (
           <li
             key={index}
-            className={`${item === active ? "text-mainGreen" : ""}`}
+            className={`font-light mb-[3px] ${
+              item === active ? "text-mainGreen" : ""
+            }`}
           >
             <Link
               href={`#${item}`}
@@ -36,6 +35,9 @@ export default function Toc({ TocArray }: { TocArray: string[] }) {
             </Link>
           </li>
         ))}
+        <li>
+          <Link href={`#`}>Top</Link>
+        </li>
       </ul>
     </aside>
   );

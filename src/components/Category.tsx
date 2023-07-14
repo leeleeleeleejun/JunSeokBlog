@@ -2,18 +2,25 @@ import Link from "next/link";
 
 export default function Category({
   children,
-  category,
+  href,
+  quantity,
+  isActive,
 }: {
   children: string;
-  category: string;
+  href: string;
+  quantity: number;
+  isActive: boolean;
 }) {
   return (
-    <li>
+    <li className="mx-[3px]">
       <Link
-        href={`/${category}`}
-        className="text-black hover:text-mainGreen transition-all"
+        href={href}
+        className={`font-light ${
+          isActive ? "text-mainGreen" : "text-black hover:underline"
+        }`}
       >
         {children}
+        <span className="text-sm text-[#bfbfbf]"> ({quantity})</span>
       </Link>
     </li>
   );
