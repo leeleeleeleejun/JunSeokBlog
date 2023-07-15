@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import LightIcon from "./icons/lightIcon";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -33,7 +33,7 @@ export default function Header() {
         visible ? "top-0" : "top-[-80px]"
       }`}
     >
-      <div className="flex justify-between items-center h-[80px] max-w-[900px] m-auto px-[10px]">
+      <div className="flex justify-between items-center h-[80px] max-w-[900px] m-auto px-[20px]">
         <nav className="flex justify-between items-center w-[30%] min-w-[200px]">
           <NavItem isActive={isActive} href="/">
             Home
@@ -45,9 +45,7 @@ export default function Header() {
             Timer
           </NavItem>
         </nav>
-        <button>
-          <LightIcon />
-        </button>
+        <ThemeToggle />
       </div>
     </header>
   );
@@ -65,7 +63,7 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`w-[20px] h-[100%] hover:text-mainGreen text-center transition-all ${
+      className={`w-[20px] h-[100%] hover:text-mainGreen text-center duration-[400ms] ${
         isActive === children
           ? "text-mainGreen font-bold text-xl"
           : "text-black"

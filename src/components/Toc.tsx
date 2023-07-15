@@ -17,11 +17,11 @@ export default function Toc({ TocArray }: { TocArray: string[] }) {
   return (
     <aside className="fixed top-[350px] ml-[1000px] text-sm w-[200px]  max-[1540px]:hidden">
       <p className="font-semibold mb-[10px]">On this page</p>
-      <ul>
+      <ul className="font-light">
         {TocArray.map((item, index) => (
           <li
             key={index}
-            className={`font-light mb-[3px] ${
+            className={`mb-[3px] hover:text-mainGreen ${
               item === active ? "text-mainGreen" : ""
             }`}
           >
@@ -35,8 +35,8 @@ export default function Toc({ TocArray }: { TocArray: string[] }) {
             </Link>
           </li>
         ))}
-        <li>
-          <Link href={`#`}>Top</Link>
+        <li className="mt-[10px] pt-[5px] border-t-[1px] hover:text-mainGreen">
+          <Link href={`#`}>Scroll to top</Link>
         </li>
       </ul>
     </aside>
