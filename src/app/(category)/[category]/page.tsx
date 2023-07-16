@@ -13,6 +13,7 @@ export default function CategoryPage({
     "description",
     "date",
     "tags",
+    "readTime",
   ]);
   return (
     <ul>
@@ -24,6 +25,7 @@ export default function CategoryPage({
           title={post.title}
           description={post.description}
           date={post.date}
+          readTime={post.readTime}
         />
       ))}
     </ul>
