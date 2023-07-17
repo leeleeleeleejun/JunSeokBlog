@@ -17,13 +17,11 @@ export default function PostItem({
   readTime: string;
 }) {
   return (
-    <li className="flex mb-[10px] p-[20px] rounded border-b-[1px] border-b-[#e7e7e7] hover:translate-y-[-5px] hover:border-r-[10px] hover:border-r-mainGreen shadow-list duration-[400ms]">
+    <li className="flex mb-[20px] p-[20px] rounded border-b-[1px] border-b-[#e7e7e7] hover:translate-y-[-5px] hover:border-r-[10px] hover:border-r-mainGreen shadow-list duration-[400ms] dark:bg-neutral-800">
       <Link href={`/${category}/${slug}`} className="flex flex-col w-[100%]">
-        <h3 className="text-h3 font-bold">{title}</h3>
+        <h4 className="text-h4 font-bold">{title}</h4>
         <div className="text-sm">{description}</div>
-        <div>
-          <PostInfo date={date} readTime={readTime} />
-        </div>
+        <PostInfo date={date} readTime={readTime} />
       </Link>
     </li>
   );

@@ -1,0 +1,48 @@
+---
+title: "React_Study [ Vite ]"
+description: "Vite 제대로 알고 사용하기 위해"
+date: "2023/07/09"
+readTime: "5분"
+tags: ["Vite"]
+---
+
+제대로 알고 사용하기 위해
+
+### Vite를 말 하기 전 기존에 사용했던 CRA란
+
+> `npx create-react-app '프로젝트명'` 으로 React를 사용한 프로젝트 환경을 알아서 셋팅해주는 것이라 생각하면 된다.
+>
+> - public 디렉토리에 index.html과 logo, favicon 등의 static asset 및 기본적인 리액트 코드(index.js, app.js) 설정
+> - webpack, babel, eslint, jest 등 리액트 개발에 필요한 각종 환경설정
+> - react, react-dom, react-scripts 등 각종 라이브러리 설치
+> - react-scripts를 사용하여 package.json에 npm command 정의
+>
+>   ...
+
+### Vite 왜 사용할까?
+
+> 위에서 말한 CRA은 webpack이라는 번들러를 사용하는데,
+> 번들러의 중요 역할은 JavaScript의 여러 모듈들을 하나의 파일로 모으는 것이다.
+> **이때, 번들러의 문제점은 느린 빌드 속도였다.**
+> 소스 코드를 업데이트 하게 되면 번들링 과정을 다시 거쳐야 했었다. 따라서 서비스가 커질수록 소스 코드 갱신 시간 또한 선형적으로 증가하게 되었다.
+> 이러한 불편함으로 Vite를 사용
+
+### Vite란
+
+> Vite는 현대적인 웹 개발을 위한 빠르고 경량화된 빌드 도구로서, 개발 서버에서 주로 사용되는 요소 중 하나가 Esbuild이다.
+> Esbuild는 기존 번들러와 달리 자바스크립트(javascript)가 아니라 go언어로 작성이 되었다.
+>
+> #### 개발서버 구동
+>
+> - 모듈 단위로 파일을 서빙하며, 각 모듈은 개별적으로 캐싱됩니다.
+> - Dependencies와 Source code로 나누어 번들링 작업 진행
+> - Dependencies: 개발 시 그 내용이 바뀌지 않을 일반적인 JavaScript 소스 코드입니다.
+> - Source code: 컴파일링이 필요하고, 수정 또한 매우 잦은 Non-plain JavaScript 소스 코드
+>   > **Source code가 업데이트 됐을 때**
+>   >
+>   > - 모듈 감지
+>   > - 변경된 모듈 번들링
+>   > - 모듈 교체
+>   > - HMR 핫 업데이트
+
+Vite는 esbuild를 활용해 개발 서버에서 빠른 개발과 실시간 반영을 지원하는 강력한 도구로 사용이 많아졌다.

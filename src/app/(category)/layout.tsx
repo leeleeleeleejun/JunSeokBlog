@@ -10,9 +10,9 @@ export default function DashboardLayout({
   const categories = getCategoriesQuantity(getCategories);
   return (
     <section className="flex flex-col relative">
-      <div>
-        <h1>Junseok Lee</h1>
+      <div className="ml-[10px] mt-[20px] mb-[40px] text-[14px] font-light tracking-tight leading-7">
         <p>안녕하세요, 웹 프론트엔드 개발자 이준석입니다.</p>
+        <p>이곳은 개발자로서 저의 경험과 배움을 기록하는 공간입니다.🌱</p>
       </div>
       <Categories categories={categories} />
       {children}

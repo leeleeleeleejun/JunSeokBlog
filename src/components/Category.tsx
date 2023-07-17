@@ -12,15 +12,14 @@ export default function Category({
   isActive: boolean;
 }) {
   return (
-    <li className="mx-[3px]">
-      <Link
-        href={href}
-        className={`font-light ${
-          isActive ? "text-mainGreen" : "hover:underline"
-        }`}
-      >
+    <li
+      className={`mx-[3px] text-sm  ${
+        isActive ? "text-mainGreen" : "hover:underline"
+      }`}
+    >
+      <Link href={href}>
         {children}
-        <span className="text-sm text-[lightGray]"> ({quantity})</span>
+        <span className="text-xs text-[lightGray]"> ({quantity})</span>
       </Link>
     </li>
   );

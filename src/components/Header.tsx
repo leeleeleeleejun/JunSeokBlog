@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky mb-[40px] bg-white dark:bg-darkModeBG border-b-[1px] duration-300${
+      className={`sticky mb-[40px] bg-white dark:bg-darkModeBG border-b-[1px] duration-300 ${
         visible ? "top-0" : "top-[-80px]"
       }`}
     >

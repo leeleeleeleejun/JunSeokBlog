@@ -15,9 +15,9 @@ export default function Categories({
   const isActive = pathname === "/";
 
   return (
-    <div className="flex flex-col min-[1150px]:absolute top-[50px] left-[-15%] mb-[10px]">
+    <aside className="flex flex-col min-[1200px]:absolute top-[120px] left-[-16%] mb-[10px]">
       <div className=" mb-[10px] font-semibold text-xl">Category</div>
-      <ul className="flex min-[1150px]:flex-col">
+      <ul className="flex min-[1200px]:flex-col">
         <Category
           href="/"
           isActive={isActive}
@@ -39,6 +39,6 @@ export default function Categories({
           );
         })}
       </ul>
-    </div>
+    </aside>
   );
 }

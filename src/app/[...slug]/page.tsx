@@ -1,7 +1,7 @@
 import { getPostBySlug } from "../../lib/api";
 import Tag from "@/components/tag";
 import Post from "@/components/PostContent";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 export async function generateMetadata({
   params,
@@ -27,14 +27,14 @@ export default function Page({ params }: { params: { slug: string[] } }) {
   const tags = Array.from(post.tags);
 
   return (
-    <div>
-      <h1 className="my-[0.67em] font-bold text-5xl">{post.title}</h1>
+    <>
+      <h1 className="my-[0.67em] font-bold text-h1">{post.title}</h1>
       <div className="flex mt-[20px] mb-[40px]">
         {tags.map((item, index) => (
           <Tag key={index}>{item}</Tag>
         ))}
       </div>
       <Post>{post.content}</Post>
-    </div>
+    </>
   );
 }

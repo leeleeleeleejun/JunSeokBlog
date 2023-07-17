@@ -21,10 +21,11 @@ module.exports = {
       },
       colors: {
         codeTagText: "#EB5757",
-        codeTagBG: "rgba(135,131,120,0.15)",
-        mainGreen: "rgb(74 222 128)",
+        codeTagBG: "#87837826",
+        mainGreen: "#4ADE80",
         lightGray: "#bfbfbf",
         darkModeBG: "#1a1a1b",
+        aTag: "#0969da",
       },
       boxShadow: {
         list: "3px 3px 10px #eee",

@@ -60,12 +60,13 @@ export default function Post({ children }: { children: string }) {
             img: ({ src, alt, node, ...props }) => (
               <Image
                 {...props}
-                width={500}
+                width={600}
                 height={500}
                 src={src || ""}
                 alt={alt || ""}
                 placeholder={undefined}
                 className="m-auto"
+                priority={true}
               />
             ),
             blockquote: ({ node, ...props }) => (
@@ -102,6 +103,9 @@ export default function Post({ children }: { children: string }) {
             ),
             ul: ({ ordered, node, ...props }) => (
               <ul {...props} className="list-disc my-[1em] pl-[30px]" />
+            ),
+            a: ({ node, ...props }) => (
+              <a {...props} className="text-aTag hover:underline" />
             ),
             u: ({ node, ...props }) => <u {...props} className="underline" />,
             p: ({ node, ...props }) => (

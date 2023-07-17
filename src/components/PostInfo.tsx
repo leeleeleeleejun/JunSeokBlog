@@ -8,7 +8,7 @@ export default function PostInfo({
   readTime: string;
 }) {
   return (
-    <div className="flex items-center text-sm text-[lightGray]">
+    <div className="flex items-center font-light text-sm text-[lightGray]">
       <CalendarIcon />
       <span className="mx-[5px]">{date}</span>
       <ClockIcon />
