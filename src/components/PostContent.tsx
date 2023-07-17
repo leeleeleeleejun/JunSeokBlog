@@ -1,7 +1,11 @@
+"use client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Toc from "./Toc";
 import Link from "next/link";
+import Image from "next/image";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Post({ children }: { children: string }) {
   const TocArray: string[] = [];
@@ -48,26 +52,51 @@ export default function Post({ children }: { children: string }) {
               );
             },
             h4: ({ node, ...props }) => (
-              <h4 {...props} className="text-h4 font-bold my-[1.33em]" />
+              <h4 {...props} className="text-h4 font-bold my-[1em]" />
             ),
             h5: ({ node, ...props }) => (
               <h5 {...props} className="text-h5 font-bold my-[1.67em]" />
             ),
+            img: ({ src, alt, node, ...props }) => (
+              <Image
+                {...props}
+                width={500}
+                height={500}
+                src={src || ""}
+                alt={alt || ""}
+                placeholder={undefined}
+                className="m-auto"
+              />
+            ),
             blockquote: ({ node, ...props }) => (
               <blockquote
                 {...props}
-                className="bg-slate-50 my-[1em] border-l-4 border-mainGreen py-[1rem] pl-[2rem] pr-[1rem]"
+                className="bg-slate-50 my-[1em] border-l-4 border-mainGreen py-[1rem] pl-[2rem] pr-[1rem] dark:bg-[#1E1E1E]"
               />
             ),
-            pre: ({ node, ...props }) => (
-              <pre {...props} className="whitespace-pre p-[1rem]" />
-            ),
-            code: ({ inline, node, ...props }) => (
-              <code
-                {...props}
-                className="text-[80%] text-codeTagText bg-codeTagBG rounded p-[3px]"
-              />
-            ),
+            code: ({ style, inline, node, children, ...props }) => {
+              if (inline) {
+                return (
+                  <code
+                    {...props}
+                    className="text-[80%] text-codeTagText bg-codeTagBG rounded p-[3px]"
+                  >
+                    {children}
+                  </code>
+                );
+              }
+
+              return (
+                <SyntaxHighlighter
+                  language="javascript"
+                  style={vscDarkPlus}
+                  PreTag="div"
+                  {...props}
+                >
+                  {`${children}`}
+                </SyntaxHighlighter>
+              );
+            },
             ol: ({ ordered, node, ...props }) => (
               <ol {...props} className="list-decimal my-[1em] pl-[30px]" />
             ),

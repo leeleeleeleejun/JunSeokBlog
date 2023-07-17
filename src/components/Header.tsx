@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky border-b-[1px] mb-[40px] transition-all duration-300 bg-white ${
+      className={`sticky border-b-[1px] mb-[40px] transition-all duration-300 bg-white  dark:bg-[#1a1a1b] ${
         visible ? "top-0" : "top-[-80px]"
       }`}
     >
@@ -64,9 +64,7 @@ function NavItem({
     <Link
       href={href}
       className={`w-[20px] h-[100%] hover:text-mainGreen text-center duration-[400ms] ${
-        isActive === children
-          ? "text-mainGreen font-bold text-xl"
-          : "text-black"
+        isActive === children && "text-mainGreen font-bold text-xl"
       }`}
     >
       {children}

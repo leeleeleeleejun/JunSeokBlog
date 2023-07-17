@@ -17,12 +17,10 @@ function Click(state: theme, setState: Dispatch<SetStateAction<theme>>) {
 }
 
 export default function ThemeToggle() {
-  const storage =
-    typeof window !== "undefined" && localStorage.getItem("theme") === "dark"
-      ? "dark"
-      : "light";
-  const [state, setState] = useState<theme>(storage);
-
+  const [state, setState] = useState<theme>("light");
+  useEffect(() => {
+    setState(localStorage.theme);
+  }, []);
   useEffect(() => {
     if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");

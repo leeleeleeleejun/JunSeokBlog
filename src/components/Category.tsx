@@ -16,7 +16,7 @@ export default function Category({
       <Link
         href={href}
         className={`font-light ${
-          isActive ? "text-mainGreen" : "text-black hover:underline"
+          isActive ? "text-mainGreen" : "hover:underline"
         }`}
       >
         {children}

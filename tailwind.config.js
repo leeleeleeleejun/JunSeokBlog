@@ -13,12 +13,11 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontSize: {
-        h1: "2em",
-        h2: "1.5em",
-        h3: "1.17em",
-        h4: "1em",
-        h5: "0.83em",
-        // subText: "text-sm",
+        h1: "3rem;",
+        h2: "2rem",
+        h3: "1.5rem",
+        h4: "1.2rem",
+        h5: "1rem",
       },
       colors: {
         codeTagText: "#EB5757",

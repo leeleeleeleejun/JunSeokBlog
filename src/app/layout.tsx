@@ -22,7 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} `}>
+      <body
+        className={`${inter.className} dark:bg-[#1a1a1b] dark:text-[white]`}
+      >
         <Header />
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
