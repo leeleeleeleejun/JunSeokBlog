@@ -15,8 +15,8 @@ export default function Categories({
   const isActive = pathname === "/";
 
   return (
-    <div className="flex flex-col mb-[10px] min-[1150px]:absolute top-[50px] left-[-15%]">
-      <div className="text-xl font-semibold mb-[10px]">Category</div>
+    <div className="flex flex-col min-[1150px]:absolute top-[50px] left-[-15%] mb-[10px]">
+      <div className=" mb-[10px] font-semibold text-xl">Category</div>
       <ul className="flex min-[1150px]:flex-col">
         <Category
           href="/"

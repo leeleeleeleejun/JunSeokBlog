@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getAllPosts, getPostCategories } from "../../lib/api";
 import PostItem from "@/components/PostItem";
 

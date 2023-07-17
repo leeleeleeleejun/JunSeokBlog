@@ -23,6 +23,8 @@ module.exports = {
         codeTagText: "#EB5757",
         codeTagBG: "rgba(135,131,120,0.15)",
         mainGreen: "rgb(74 222 128)",
+        lightGray: "#bfbfbf",
+        darkModeBG: "#1a1a1b",
       },
       boxShadow: {
         list: "3px 3px 10px #eee",

@@ -71,7 +71,7 @@ export default function Post({ children }: { children: string }) {
             blockquote: ({ node, ...props }) => (
               <blockquote
                 {...props}
-                className="bg-slate-50 my-[1em] border-l-4 border-mainGreen py-[1rem] pl-[2rem] pr-[1rem] dark:bg-[#1E1E1E]"
+                className="my-[1em] py-[1rem] pl-[2rem] pr-[1rem] border-l-4 border-mainGreen bg-slate-50 dark:bg-[#1E1E1E]"
               />
             ),
             code: ({ style, inline, node, children, ...props }) => {
@@ -79,7 +79,7 @@ export default function Post({ children }: { children: string }) {
                 return (
                   <code
                     {...props}
-                    className="text-[80%] text-codeTagText bg-codeTagBG rounded p-[3px]"
+                    className="p-[3px] rounded bg-codeTagBG text-[80%] text-codeTagText"
                   >
                     {children}
                   </code>

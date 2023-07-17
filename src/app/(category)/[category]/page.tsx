@@ -1,5 +1,17 @@
 import PostItem from "@/components/PostItem";
 import { getPostsByCategory } from "@/lib/api";
+import { Metadata, ResolvingMetadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}): Promise<Metadata> {
+  const category = params.category;
+  return {
+    title: category,
+  };
+}
 
 export default function CategoryPage({
   params,

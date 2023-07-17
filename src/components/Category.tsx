@@ -20,7 +20,7 @@ export default function Category({
         }`}
       >
         {children}
-        <span className="text-sm text-[#bfbfbf]"> ({quantity})</span>
+        <span className="text-sm text-[lightGray]"> ({quantity})</span>
       </Link>
     </li>
   );

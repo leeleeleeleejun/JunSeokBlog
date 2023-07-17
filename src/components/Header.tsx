@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky border-b-[1px] mb-[40px] transition-all duration-300 bg-white  dark:bg-[#1a1a1b] ${
+      className={`sticky mb-[40px] bg-white dark:bg-darkModeBG border-b-[1px] duration-300${
         visible ? "top-0" : "top-[-80px]"
       }`}
     >
@@ -63,7 +63,7 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`w-[20px] h-[100%] hover:text-mainGreen text-center duration-[400ms] ${
+      className={`w-[20px] h-[100%] text-center hover:text-mainGreen duration-[400ms] ${
         isActive === children && "text-mainGreen font-bold text-xl"
       }`}
     >
