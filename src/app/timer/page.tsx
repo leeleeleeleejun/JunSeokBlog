@@ -1,3 +1,11 @@
 export default function Timer() {
-  return <h1 className="font-bold text-h1 underline">Hello, Timer!</h1>;
+  return (
+    <div>
+      <input type="number" max={8} className="bg-mainGreen" />
+      <input type="number" max={60} className="bg-mainGreen" />
+      <input type="number" max={60} className="bg-mainGreen" />
+      <button>START</button>
+      <button>RESET</button>
+    </div>
+  );
 }

@@ -1,5 +1,29 @@
+import Skills from "@/components/Skills";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "JunSeok-blog",
+  description: "이준석의 개발 블로그입니다",
+  openGraph: {
+    title: "JunSeok-blog",
+    description: "이준석의 개발 블로그입니다",
+    locale: "ko-KR",
+    siteName: "JunSeok-blog.com",
+    url: "https://JunSeok-blog.com/about",
+    type: "profile",
+  },
+};
+
+function Highlight({ children }: { children: string }) {
+  return (
+    <span className="bg-cyan-200 px-[3px] mx-[2px] dark:bg-cyan-500">
+      {children}
+    </span>
+  );
+}
+
 export default function About() {
   return (
     <>
@@ -13,8 +37,8 @@ export default function About() {
             width={200}
             height={200}
             alt="profile"
-            className="rounded-full"
             priority={true}
+            className="rounded-full duration-300 hover:scale-110"
           />
         </Link>
         <div className="text-5xl text-center leading-relaxed">
@@ -23,8 +47,11 @@ export default function About() {
           <div className="font-light">입니다</div>
         </div>
       </div>
-      <div className="mt-[80px] mb-[30px] font-semibold text-[20px] tracking-tight leading-7">
-        <p>기본을 중요시하며 효율적인 코드를 사랑합니다.</p>
+      <div className="mt-[80px] mb-[30px] text-[17px] font-light tracking-tight leading-7">
+        <p>
+          <Highlight>기본</Highlight>을 중요시하며
+          <Highlight>효율적인 코드</Highlight>를 사랑합니다.
+        </p>
         <p>효율적인 코드를 짜기 위해 항상 고민 하고,</p>
         <p>중복된 코드를 지우고 깔끔하게 만들 때 즐거움을 느낍니다.</p>
         <p>
@@ -32,7 +59,10 @@ export default function About() {
           위해 노력합니다.
         </p>
       </div>
-      <div>저에 대해 더 알고싶어지셨다면, 제 사진을 눌러주세요!</div>
+      <div className="font-light">
+        저에 대해 더 알고싶어지셨다면, 제 사진을 클릭해주세요!
+      </div>
+      <Skills />
     </>
   );
 }

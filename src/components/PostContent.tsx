@@ -72,7 +72,7 @@ export default function Post({ children }: { children: string }) {
             blockquote: ({ node, ...props }) => (
               <blockquote
                 {...props}
-                className="my-[1em] py-[1rem] pl-[2rem] pr-[1rem] border-l-4 border-mainGreen bg-slate-50 dark:bg-[#1E1E1E]"
+                className="my-[1em] py-[1rem] pl-[2rem] pr-[1rem] border-l-4 border-mainGreen bg-blockquoteBG dark:bg-darkModeBlockquoteBG"
               />
             ),
             code: ({ style, inline, node, children, ...props }) => {

@@ -26,6 +26,8 @@ module.exports = {
         lightGray: "#bfbfbf",
         darkModeBG: "#1a1a1b",
         aTag: "#0969da",
+        blockquoteBG: "#f8fafc",
+        darkModeBlockquoteBG: "#1E1E1E",
       },
       boxShadow: {
         list: "3px 3px 10px #eee",

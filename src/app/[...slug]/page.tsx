@@ -1,5 +1,5 @@
 import { getPostBySlug } from "../../lib/api";
-import Tag from "@/components/tag";
+import Tag from "@/components/Tag";
 import Post from "@/components/PostContent";
 import { Metadata } from "next";
 
@@ -8,9 +8,18 @@ export async function generateMetadata({
 }: {
   params: { slug: string[] };
 }): Promise<Metadata> {
-  const slug = params.slug[1];
+  const [category, slug] = params.slug;
   return {
     title: slug,
+    description: `${slug}에 관해`,
+    openGraph: {
+      title: slug,
+      description: `${slug}에 관해`,
+      locale: "ko-KR",
+      siteName: "JunSeok-blog.com",
+      url: `https://JunSeok-blog.com/${category}/${slug}`,
+      type: "website",
+    },
   };
 }
 export default function Page({ params }: { params: { slug: string[] } }) {
