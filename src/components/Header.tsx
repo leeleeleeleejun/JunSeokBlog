@@ -34,15 +34,12 @@ export default function Header() {
       }`}
     >
       <div className="flex justify-between items-center h-[80px] max-w-[900px] m-auto px-[20px]">
-        <nav className="flex justify-between items-center w-[30%] min-w-[200px]">
+        <nav className="flex justify-between items-center min-w-[120px]">
           <NavItem isActive={isActive} href="/">
             Home
           </NavItem>
           <NavItem isActive={isActive} href="/about">
             About
-          </NavItem>
-          <NavItem isActive={isActive} href="/timer">
-            Timer
           </NavItem>
         </nav>
         <ThemeToggle />
@@ -63,8 +60,8 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`w-[20px] h-[100%] text-center hover:text-mainGreen duration-[400ms] ${
-        isActive === children && "text-mainGreen font-bold text-xl"
+      className={`w-[20px] h-[100%] text-center hover:text-mainGreen duration-[400ms] text-[15px] ${
+        isActive === children && "text-mainGreen font-bold text-[20px]"
       }`}
     >
       {children}

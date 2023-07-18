@@ -36,7 +36,7 @@ export default function RootLayout({
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
         </main>
-        <footer className="flex flex-col mt-[250px] py-[30px] text-xs text-gray-400">
+        <footer className="flex flex-col mt-[200px] py-[30px] text-xs text-gray-400">
           <nav className="flex justify-center">
             <Link href="https://github.com/leeleeleeleejun" target="_blank">
               <GitHubIcon />

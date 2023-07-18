@@ -18,7 +18,7 @@ export async function generateMetadata({
       locale: "ko-KR",
       siteName: "JunSeok-blog.com",
       url: `https://JunSeok-blog.com/${category}/${slug}`,
-      type: "website",
+      type: "article",
     },
   };
 }
