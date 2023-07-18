@@ -13,21 +13,21 @@ export default function Skills() {
   return (
     <div className="mt-[50px]">
       <h3 className="text-h3 font-semibold">Skills</h3>
-      <ul className="flex my-[20px]">
+      <ul className="flex my-[20px] flex-wrap">
         {language.map((item, index) => (
           <li key={item + index}>
             <Tag>{item}</Tag>
           </li>
         ))}
       </ul>
-      <ul className="flex my-[20px]">
+      <ul className="flex my-[20px]  flex-wrap">
         {library.map((item, index) => (
           <li key={item + index}>
             <Tag>{item}</Tag>
           </li>
         ))}
       </ul>
-      <ul className="flex my-[20px]">
+      <ul className="flex my-[20px]  flex-wrap">
         <Tag>{Framework[0]}</Tag>
       </ul>
     </div>
