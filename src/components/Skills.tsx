@@ -1,4 +1,5 @@
 import Tag from "./Tag";
+
 export default function Skills() {
   const language = ["HTML", "CSS", "JavaScript", "TypeScript"];
   const Framework = ["Next.js"];
