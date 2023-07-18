@@ -115,7 +115,7 @@ tags: ["Project"]
 >
 > 처음 게시글을 설계할 때, 게시글데이터에 comments데이터까지 populate하여 한 번의 요청으로 해결하려 했다.
 >
-> ```js
+> ```
 > Feed(게시글) 스키마
 > - title: string
 > - author: Types.ObjectId <User>
@@ -130,7 +130,7 @@ tags: ["Project"]
 > - views: number
 > ```
 >
-> ```js
+> ```
 > Comment(댓글) 스키마
 > - author: Types.ObjectId <User>
 > - content: string
@@ -164,7 +164,7 @@ tags: ["Project"]
 > - 실수로 벗어난 경우 (글의 내용이 남아져 있어야 함)  
 >   그러다 react-router-dom에 prompt라는 컴포넌트를 알게되었다.
 >
-> ```js
+> ```
 > <Prompt when={shouldConfirm} message="Are you sure you want to leave?" />
 > ```
 >
@@ -205,7 +205,7 @@ tags: ["Project"]
 > - **IME composition = 한글, 일본어, 중국어 등을 변환하는 과정(composition)에서 keydown 이벤트는 OS 뿐만 아니라 브라우저에서도 처리되기 때문에 중복 발생된다.**
 > - JavaScript의 keyboard event 객체에 `isComposing`이라는 메소드가 있어 해당 메소드를 이용해 해결 가능
 >
-> ```js
+> ```
 > const keyboardEventHandler = (event) => {
 >   if (event.isComposing) return;
 >   // ... 나머지 키보드 이벤트
@@ -217,7 +217,7 @@ tags: ["Project"]
 >   > - !! 추가
 >   > - **nativeEvent엔 isComposing이 포함되어 있어 사용해서 문제 해결이 가능하다.**
 >   >
->   > ```js
+>   > ```
 >   > onKeyDown={(e) => {
 >   >       if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
 >   >           RegisterComment();
@@ -227,7 +227,7 @@ tags: ["Project"]
 >
 > - React에서 composition event를 별도로 제공
 >
-> ```js
+> ```
 >      onCompositionStart={() => setIsComposing(true)}
 >      onCompositionEnd={() => setIsComposing(false)}
 >      onKeyUp={(e) => {

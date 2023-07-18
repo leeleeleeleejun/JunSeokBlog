@@ -49,7 +49,7 @@ export default function RootLayout({
             </Link>
           </nav>
           <p className="mt-[10px] text-center">
-            JunSeok Lee • © 2023 • https://JunSeok-blog.com
+            JunSeok Lee • © 2023 • https://junseok-blog.com
           </p>
         </footer>
       </body>

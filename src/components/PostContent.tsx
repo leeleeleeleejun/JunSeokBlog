@@ -11,7 +11,7 @@ export default function Post({ children }: { children: string }) {
   const TocArray: string[] = [];
   return (
     <div className="flex">
-      <div>
+      <div className="w-[100%]">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -60,12 +60,12 @@ export default function Post({ children }: { children: string }) {
             img: ({ src, alt, node, ...props }) => (
               <Image
                 {...props}
-                width={600}
+                width={500}
                 height={500}
                 src={src || ""}
                 alt={alt || ""}
                 placeholder={undefined}
-                className="m-auto"
+                className="m-auto max-[768px]:max-w-[300px]"
                 priority={true}
               />
             ),
@@ -80,17 +80,17 @@ export default function Post({ children }: { children: string }) {
                 return (
                   <code
                     {...props}
-                    className="p-[3px] rounded bg-codeTagBG text-[80%] text-codeTagText"
+                    className="p-[3px] rounded bg-codeTagBG text-[80%] text-codeTagText break-all"
                   >
                     {children}
                   </code>
                 );
               }
-
               return (
                 <SyntaxHighlighter
                   language="javascript"
                   style={vscDarkPlus}
+                  showLineNumbers={true}
                   PreTag="div"
                   {...props}
                 >

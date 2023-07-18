@@ -53,7 +53,9 @@ export default function Page({ params }: { params: { slug: string[] } }) {
 
   return (
     <>
-      <h1 className="my-[0.67em] font-bold text-h1">{post.title}</h1>
+      <h1 className="my-[0.67em] font-bold text-h1 max-[768px]:text-h2">
+        {post.title}
+      </h1>
       <div className="flex mt-[20px] mb-[40px]">
         {tags.map((item, index) => (
           <Tag key={index}>{item}</Tag>
