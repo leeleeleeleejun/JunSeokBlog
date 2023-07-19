@@ -38,10 +38,10 @@ export default function About() {
             height={200}
             alt="profile"
             priority={true}
-            className="rounded-full duration-300 hover:scale-110"
+            className="rounded-full duration-300 hover:scale-110 max-md:w-[150px]"
           />
         </Link>
-        <div className="text-5xl text-center leading-relaxed">
+        <div className="text-5xl text-center leading-relaxed max-md:text-4xl">
           <div className="font-light">안녕하세요</div>
           <strong>이준석</strong>
           <div className="font-light">입니다</div>
@@ -60,7 +60,7 @@ export default function About() {
         </p>
       </div>
       <div className="font-light">
-        저에 대해 더 알고싶어지셨다면, 제 사진을 클릭해주세요!
+        저에 대해 더 알고싶으시다면, 제 사진을 클릭해주세요!
       </div>
       <Skills />
     </>

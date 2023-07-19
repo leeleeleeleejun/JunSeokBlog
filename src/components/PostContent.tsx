@@ -10,8 +10,8 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 export default function Post({ children }: { children: string }) {
   const TocArray: string[] = [];
   return (
-    <div className="flex">
-      <div className="w-[100%]">
+    <>
+      <div className="w-[100%] max-md:text-sm">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -21,7 +21,7 @@ export default function Post({ children }: { children: string }) {
                 <Link href={`#${props.children[0]}`}>
                   <h1
                     {...props}
-                    className="text-h1 font-bold my-[0.67em]"
+                    className="text-h1 font-bold my-[0.67em] leading-[initial]"
                     id={`${props.children[0]}`}
                   />
                 </Link>
@@ -33,7 +33,7 @@ export default function Post({ children }: { children: string }) {
                 <Link href={`#${props.children[0]}`}>
                   <h2
                     {...props}
-                    className="text-h2 font-bold my-[0.83em]"
+                    className="text-h2 font-bold my-[0.83em] leading-[initial]"
                     id={`${props.children[0]}`}
                   />
                 </Link>
@@ -45,14 +45,17 @@ export default function Post({ children }: { children: string }) {
                 <Link href={`#${props.children[0]}`}>
                   <h3
                     {...props}
-                    className="text-h3 font-bold pt-[50px]"
+                    className="text-h3 font-bold pt-[50px] leading-[initial]"
                     id={`${props.children[0]}`}
                   />
                 </Link>
               );
             },
             h4: ({ node, ...props }) => (
-              <h4 {...props} className="text-h4 font-bold my-[1em]" />
+              <h4
+                {...props}
+                className="text-h4 font-bold my-[1em] leading-[initial]"
+              />
             ),
             h5: ({ node, ...props }) => (
               <h5 {...props} className="text-h5 font-bold my-[1.67em]" />
@@ -65,7 +68,7 @@ export default function Post({ children }: { children: string }) {
                 src={src || ""}
                 alt={alt || ""}
                 placeholder={undefined}
-                className="m-auto max-[768px]:max-w-[300px]"
+                className="m-auto max-md:max-w-[250px]"
                 priority={true}
               />
             ),
@@ -118,6 +121,6 @@ export default function Post({ children }: { children: string }) {
         </ReactMarkdown>
       </div>
       <Toc TocArray={TocArray} />
-    </div>
+    </>
   );
 }

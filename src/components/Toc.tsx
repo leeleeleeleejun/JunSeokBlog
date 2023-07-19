@@ -15,7 +15,7 @@ export default function Toc({ TocArray }: { TocArray: string[] }) {
   }, []);
 
   return (
-    <aside className="fixed top-[350px] w-[200px] max-[1540px]:hidden ml-[1000px] text-sm">
+    <aside className="fixed top-[350px] w-[200px] max-xl:hidden ml-[950px] text-sm  max-xl:ml-[900px]">
       <p className="font-semibold mb-[10px]">On this page</p>
       <ul className="font-light">
         {TocArray.map((item, index) => (

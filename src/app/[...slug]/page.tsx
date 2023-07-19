@@ -52,8 +52,8 @@ export default function Page({ params }: { params: { slug: string[] } }) {
   const tags = Array.from(post.tags);
 
   return (
-    <>
-      <h1 className="my-[0.67em] font-bold text-h1 max-[768px]:text-h2">
+    <div className="max-xl:w-[85%] mx-auto">
+      <h1 className="my-[0.67em] font-bold text-h1 max-md:text-h2">
         {post.title}
       </h1>
       <div className="flex mt-[20px] mb-[40px]">
@@ -62,6 +62,6 @@ export default function Page({ params }: { params: { slug: string[] } }) {
         ))}
       </div>
       <Post>{post.content}</Post>
-    </>
+    </div>
   );
 }
