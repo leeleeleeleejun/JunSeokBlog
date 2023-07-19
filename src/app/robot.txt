@@ -1,3 +1,0 @@
-User-Agent: *
-Allow: /
-Sitemap: https://junseok-blog.vercel.app/sitemap.xml
