@@ -20,8 +20,10 @@ export const metadata: Metadata = {
     url: "https://JunSeok-blog.com",
     type: "website",
   },
+  verification: {
+    google: "V7HHh8j_iC1XOgyct3SZSD2jd6mlETNzKFD4qV6WPlA",
+  },
 };
-
 export default function RootLayout({
   children,
 }: {
