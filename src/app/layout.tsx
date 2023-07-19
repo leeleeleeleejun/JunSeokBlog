@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "V7HHh8j_iC1XOgyct3SZSD2jd6mlETNzKFD4qV6WPlA",
+    other: {
+      "naver-site-verification": "94cdbe65a5d90d7930c6d71866c1cb03f6f3d81d",
+    },
   },
 };
 export default function RootLayout({
