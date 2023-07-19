@@ -1,7 +1,3 @@
 User-Agent: *
 Allow: /
-<<<<<<< HEAD
 Sitemap: https://junseok-blog.vercel.app/sitemap.xml
-=======
-Sitemap: https://junseok-blog.vercel.app/sitemap.xml
->>>>>>> c1d5c52d534e2f3cef6d02047298edfcb03f5b3d
