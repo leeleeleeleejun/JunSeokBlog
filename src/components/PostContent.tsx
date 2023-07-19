@@ -21,7 +21,7 @@ export default function Post({ children }: { children: string }) {
                 <Link href={`#${props.children[0]}`}>
                   <h1
                     {...props}
-                    className="text-h1 font-bold my-[0.67em] leading-[initial]"
+                    className="text-h1 my-[0.67em] pt-[50px] font-bold leading-[initial]"
                     id={`${props.children[0]}`}
                   />
                 </Link>
@@ -33,7 +33,7 @@ export default function Post({ children }: { children: string }) {
                 <Link href={`#${props.children[0]}`}>
                   <h2
                     {...props}
-                    className="text-h2 font-bold my-[0.83em] leading-[initial]"
+                    className="text-h2 my-[0.83em] pt-[50px] font-bold leading-[initial]"
                     id={`${props.children[0]}`}
                   />
                 </Link>
@@ -45,7 +45,7 @@ export default function Post({ children }: { children: string }) {
                 <Link href={`#${props.children[0]}`}>
                   <h3
                     {...props}
-                    className="text-h3 font-bold pt-[50px] leading-[initial]"
+                    className="text-h3 my-[1em] pt-[50px] font-bold leading-[initial]"
                     id={`${props.children[0]}`}
                   />
                 </Link>
@@ -68,7 +68,7 @@ export default function Post({ children }: { children: string }) {
                 src={src || ""}
                 alt={alt || ""}
                 placeholder={undefined}
-                className="m-auto max-md:max-w-[250px]"
+                className="m-auto my-[30px] max-md:max-w-[250px]"
                 priority={true}
               />
             ),

@@ -2,7 +2,6 @@ import Skills from "@/components/Skills";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
 export const metadata: Metadata = {
   title: "JunSeok-blog",
   description: "이준석의 개발 블로그입니다",
@@ -33,7 +32,7 @@ export default function About() {
           target="_blank"
         >
           <Image
-            src="/images/about/profile2.jpg"
+            src="/images/about/profile.jpg?v=4"
             width={200}
             height={200}
             alt="profile"
