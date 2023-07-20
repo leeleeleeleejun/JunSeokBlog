@@ -107,6 +107,21 @@ export default function Post({ children }: { children: string }) {
             ul: ({ ordered, node, ...props }) => (
               <ul {...props} className="list-disc my-[1em] pl-[30px]" />
             ),
+            table: ({ node, ...props }) => (
+              <table {...props} className="mx-auto my-[20px]" />
+            ),
+            th: ({ node, isHeader, ...props }) => (
+              <th
+                {...props}
+                className="p-[5px] border-[1px] border-black text-center"
+              />
+            ),
+            td: ({ node, isHeader, ...props }) => (
+              <td
+                {...props}
+                className="p-[5px] border-[1px] border-black text-center"
+              />
+            ),
             a: ({ node, ...props }) => (
               <a {...props} className="text-aTag hover:underline" />
             ),

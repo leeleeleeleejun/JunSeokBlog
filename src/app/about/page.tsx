@@ -32,7 +32,7 @@ export default function About() {
           target="_blank"
         >
           <Image
-            src="/images/about/profile.jpg?v=4"
+            src="/images/about/profile.jpg"
             width={200}
             height={200}
             alt="profile"

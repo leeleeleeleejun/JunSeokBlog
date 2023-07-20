@@ -1,0 +1,85 @@
+---
+title: "Next.js 배포 후 동적 라우팅 페이지 접속 시 500 에러 발생"
+description: "Next.js 13 버전을 기준으로 하고 있습니다."
+date: "2023/07/20"
+readTime: "8분"
+tags: ["Next.js", "Study"]
+---
+
+## 에러발생
+
+블로그를 Next.js로 개발하고 Vercel로 배포한 후, 게시글이 모두 에러로 표시되어 보이지 않는 문제가 발생했습니다. 해당 에러의 공통점은 모든 게시글이 동적 라우팅을 사용하는 `app/[...slug]` 형태의 경로로 구성되어 있고, category와 slug 정보를 가져와서 해당 게시글을 요청하는 목적이었습니다.
+![](/images/posts/next/STATIC-RENDERING/1.png)
+
+![](/images/posts/next/STATIC-RENDERING/2.png)
+
+## 에러발생 이유
+
+![](/images/posts/next/STATIC-RENDERING/3.png)
+
+현재 Next.js는 정적 사이트 생성(Static Site Generation, SSG)을 지향하고 있으며, 정적 렌더링(Static Rendering)이 기본값입니다.
+
+여기서 "정적 렌더링"은 빌드 타임(Build Time)에 미리 페이지들을 정적으로 생성하여 정적 페이지(HTML)를 모두 만드는 것을 의미합니다. 이렇게 생성된 정적 페이지들은 서버에서 요청 시점에 아무런 계산 없이 클라이언트에게 제공되므로 성능과 사용자 경험을 향상시키는 데 도움이 됩니다.
+
+그렇게 페이지 모두 정적렌더링으로 생성되는 줄 알고있었다가,
+에러가 발생하고 구글링과 공식페이지를 찾으며 에러의 이유를 발견했습니다.
+
+> **In a dynamic route, components are rendered on the server at request time.**
+
+> 동적 경로에서 구성요소는 요청 시 서버에서 렌더링됩니다.
+
+그러므로 해당 글을 보고 동적 라우팅 페이지는 빌드 타임에 미리 정적 페이지로 생성되지 않으며, 서버 측에서 요청 시에 렌더링되는 것을 알 수 있습니다.
+하지만 정적 렌더링이 기본값이므로 SSR페이지를 만들려면 따로 작업이 필요합니다. 하지만 전에 아무 작업을 하지 않았었고,
+이로 인해 **동적라우팅**, **정적렌더링** 두가지가 합쳐져 서버에서 에러가 난 것으로 생각됩니다.
+
+## 해결방법
+
+#### 1. 동적 라우팅 페이지를 SSR로 변경하기
+
+해당 방법은 fetch()를 활용하여 서버 사이드 렌더링(SSR)을 수행하는 방식으로 동적 라우팅 페이지를 다음과 같은 옵션을 fetch() 호출에 추가하여 SSR로 페이지를 렌더링할 수 있습니다.
+`fetch('https://...', { cache: 'no-store' })`
+`fetch('https://...', { next: { revalidate: 0 } })`
+
+#### 2. 동적 라우팅 페이지 모두 정적페이지 생성해주기
+
+동적 라우팅 페이지에서만 에러가 발생하므로, 관련 문제라고 생각하고 Routing 공식문서에 `generateStaticParams`라는 함수가 있었습니다!
+
+> The generateStaticParams function can be used in combination with dynamic route segments to statically generate routes at build time instead of on-demand at request time.
+
+> "generateStaticParams" 함수는 동적 라우팅과 함께 사용될 수 있으며, 요청 시간이 아닌 빌드 시간에 정적으로 경로를 생성하는 데 사용될 수 있다.
+
+해당 함수를 사용하면 동적라우팅에 있는 페이지들도 정적렌더링이 가능하게 해줍니다.
+
+위의 두 가지 방법 중 하나를 선택하여 문제를 해결하면 블로그의 동적 라우팅 페이지 에러를 해결할 수 있습니다.
+
+나는 2번째 `generateStaticParams`를 선택했다.
+그 이유는 SSR, SSG 특징이 있어 사용할 때 좋은 선택이 있는 데, 해당 프로젝트 페이지엔 SSG가 알맞기 때문입니다.
+
+### generateStaticParams 사용법
+
+공식홈페이지에서 아래와 같이 예시에 맞게 사용법을 알려주며,
+
+| Example Route                    | generateStaticParams Return Type          |
+| -------------------------------- | ----------------------------------------- |
+| `/product/[id]`                  | `{ id: string }[]`                        |
+| `/products/[category]/[product]` | `{ category: string, product: string }[]` |
+| `/products/[...slug]`            | `{ slug: string[] }[]`                    |
+
+저의 경우 3번째 예시에 해당됩니다.
+
+### 해결!
+
+```
+export async function generateStaticParams() {
+  const getCategories = getPostCategories();
+  // 게시글들의 모든 카테고리와 제목을 가져오는 함수
+  const posts = getAllPosts(getCategories, ["category", "slug"]);
+  return posts.map((post) => ({
+    slug: [post.category, post.slug],
+  }));
+}
+```
+
+### 참고
+
+> https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering https://nextjs.org/docs/app/building-your-application/data-fetching/fetching
