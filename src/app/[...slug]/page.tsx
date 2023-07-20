@@ -3,6 +3,13 @@ import Tag from "@/components/Tag";
 import Post from "@/components/PostContent";
 import { Metadata } from "next";
 
+export async function generateStaticParams() {
+  const getCategories = getPostCategories();
+  const posts = getAllPosts(getCategories, ["category", "slug"]);
+  return posts.map((post) => ({
+    slug: [post.category, post.slug],
+  }));
+}
 export async function generateMetadata({
   params,
 }: {
