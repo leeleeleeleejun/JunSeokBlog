@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <header
       className={`sticky mb-[40px] bg-white dark:bg-darkModeBG border-b-[1px] duration-300 z-10 ${
-        visible ? "top-0" : "top-[-80px]"
+        visible ? "top-[0]" : "top-[-80px]"
       }`}
     >
       <div className="flex justify-between items-center h-[80px] max-w-[900px] m-auto px-[20px]">

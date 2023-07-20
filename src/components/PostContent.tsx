@@ -8,7 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Post({ children }: { children: string }) {
-  const TocArray: string[] = [];
+  const TocArray: string[][] = [];
   return (
     <>
       <div className="w-[100%] max-md:text-sm">
@@ -16,7 +16,7 @@ export default function Post({ children }: { children: string }) {
           remarkPlugins={[remarkGfm]}
           components={{
             h1: ({ node, ...props }) => {
-              TocArray.push(`${props.children[0]}`);
+              TocArray.push([`${props.children[0]}`, "1"]);
               return (
                 <Link href={`#${props.children[0]}`}>
                   <h1
@@ -28,7 +28,7 @@ export default function Post({ children }: { children: string }) {
               );
             },
             h2: ({ node, ...props }) => {
-              TocArray.push(`${props.children[0]}`);
+              TocArray.push([`${props.children[0]}`, "2"]);
               return (
                 <Link href={`#${props.children[0]}`}>
                   <h2
@@ -40,7 +40,7 @@ export default function Post({ children }: { children: string }) {
               );
             },
             h3: ({ node, ...props }) => {
-              TocArray.push(`${props.children[0]}`);
+              TocArray.push([`${props.children[0]}`, "3"]);
               return (
                 <Link href={`#${props.children[0]}`}>
                   <h3
@@ -51,12 +51,19 @@ export default function Post({ children }: { children: string }) {
                 </Link>
               );
             },
-            h4: ({ node, ...props }) => (
-              <h4
-                {...props}
-                className="text-h4 font-bold my-[1em] leading-[initial]"
-              />
-            ),
+            h4: ({ node, ...props }) => {
+              TocArray.push([`${props.children[0]}`, "4"]);
+              return (
+                <Link href={`#${props.children[0]}`}>
+                  <h4
+                    {...props}
+                    className="text-h4 my-[1em] pt-[50px] font-bold leading-[initial]"
+                    id={`${props.children[0]}`}
+                  />
+                </Link>
+              );
+            },
+
             h5: ({ node, ...props }) => (
               <h5 {...props} className="text-h5 font-bold my-[1.67em]" />
             ),
@@ -75,7 +82,7 @@ export default function Post({ children }: { children: string }) {
             blockquote: ({ node, ...props }) => (
               <blockquote
                 {...props}
-                className="my-[1em] py-[1rem] pl-[2rem] pr-[1rem] border-l-4 border-mainGreen bg-blockquoteBG dark:bg-darkModeBlockquoteBG"
+                className="my-[1em] py-[1rem] pl-[2rem] pr-[1rem] border-l-4 border-mainGreen bg-[#f8fafc] dark:bg-[#1E1E1E]"
               />
             ),
             code: ({ style, inline, node, children, ...props }) => {
@@ -83,7 +90,7 @@ export default function Post({ children }: { children: string }) {
                 return (
                   <code
                     {...props}
-                    className="p-[3px] rounded bg-codeTagBG text-[80%] text-codeTagText break-all"
+                    className="p-[3px] rounded bg-[#87837826] text-[80%] text-[#EB5757] dark:text-rose-400 break-all"
                   >
                     {children}
                   </code>
@@ -123,7 +130,7 @@ export default function Post({ children }: { children: string }) {
               />
             ),
             a: ({ node, ...props }) => (
-              <a {...props} className="text-aTag hover:underline" />
+              <a {...props} className="text-[#0969da] hover:underline" />
             ),
             u: ({ node, ...props }) => <u {...props} className="underline" />,
             p: ({ node, ...props }) => (

@@ -32,6 +32,12 @@ module.exports = {
       boxShadow: {
         list: "3px 3px 10px #eee",
       },
+      spacing: {
+        0: "",
+        1: "15px",
+        2: "30px",
+        3: "45px",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
