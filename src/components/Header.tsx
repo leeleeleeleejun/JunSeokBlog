@@ -7,11 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
-  const isActive = pathname.startsWith("/about")
-    ? "About"
-    : pathname.startsWith("/timer")
-    ? "Timer"
-    : "Home";
+  const isActive = pathname.startsWith("/about") ? "About" : "Home";
   const [position, setPosition] = useState<number>(0);
   const [visible, setVisible] = useState<boolean>(true);
 
@@ -21,7 +17,15 @@ export default function Header() {
       setVisible(position > moving);
       setPosition(moving);
     };
-    window.addEventListener("scroll", handleScroll);
+    let timer: NodeJS.Timeout | null;
+    window.addEventListener("scroll", () => {
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          handleScroll();
+        }, 200);
+      }
+    });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
