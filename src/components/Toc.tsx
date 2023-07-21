@@ -2,6 +2,14 @@
 import { getIntersectionObserver } from "@/lib/getIntersectionObserver";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+const padding = {
+  0: "",
+  1: "pl-1",
+  2: "pl-2",
+  3: "pl-3",
+};
+
+type level = 0 | 1 | 2 | 3;
 
 export default function Toc({ TocArray }: { TocArray: string[][] }) {
   const [active, setActive] = useState("");
@@ -19,15 +27,16 @@ export default function Toc({ TocArray }: { TocArray: string[][] }) {
   }, []);
 
   return (
-    <aside className="fixed top-[350px] w-[250px] max-h-[300px] max-xl:hidden ml-[950px] p-[20px] text-sm max-xl:ml-[900px] overflow-y-auto">
+    <aside className="fixed top-[250px] w-[250px] max-h-[500px] max-xl:hidden ml-[950px] p-[20px] text-sm max-xl:ml-[900px] overflow-y-auto">
       <p className="font-semibold mb-[10px]">On this page</p>
       <ul className="font-light">
         {TocArray.map((item, index) => {
-          const level = "pl-" + levelArray.indexOf(item[1]);
+          const level: level = levelArray.indexOf(item[1]) as level;
+
           return (
             <li
               key={index}
-              className={`mb-[3px] hover:text-mainGreen ${level} ${
+              className={`mb-[3px] hover:text-mainGreen ${padding[level]} ${
                 item[0] === active ? "text-mainGreen" : ""
               }`}
             >
