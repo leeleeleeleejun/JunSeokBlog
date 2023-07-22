@@ -52,7 +52,7 @@ tags: ["Next.js", "Study"]
 
 위의 두 가지 방법 중 하나를 선택하여 문제를 해결하면 블로그의 동적 라우팅 페이지 에러를 해결할 수 있습니다.
 
-나는 2번째 `generateStaticParams`를 선택했다.
+저는 2번째 `generateStaticParams`를 선택을 했습니다.
 그 이유는 SSR, SSG 특징이 있어 사용할 때 좋은 선택이 있는 데, 해당 프로젝트 페이지엔 SSG가 알맞기 때문입니다.
 
 ### generateStaticParams 사용법
@@ -65,7 +65,7 @@ tags: ["Next.js", "Study"]
 | `/products/[category]/[product]` | `{ category: string, product: string }[]` |
 | `/products/[...slug]`            | `{ slug: string[] }[]`                    |
 
-저의 경우 3번째 예시에 해당됩니다.
+현재 프로젝트는 3번째 예시에 해당됩니다.
 
 ### 해결!
 

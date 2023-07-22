@@ -36,7 +36,8 @@ export default function About() {
             width={200}
             height={200}
             alt="profile"
-            priority={true}
+            priority={false}
+            placeholder={undefined}
             className="rounded-full duration-300 hover:scale-110 max-md:w-[150px]"
           />
         </Link>

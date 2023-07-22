@@ -76,7 +76,7 @@ export default function Post({ children }: { children: string }) {
                 alt={alt || ""}
                 placeholder={undefined}
                 className="m-auto my-[30px] max-md:max-w-[250px]"
-                priority={true}
+                priority={false}
               />
             ),
             blockquote: ({ node, ...props }) => (
