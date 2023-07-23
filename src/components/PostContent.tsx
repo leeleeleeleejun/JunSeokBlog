@@ -85,7 +85,7 @@ export default function Post({ children }: { children: string }) {
                 className="my-[1em] py-[1rem] pl-[2rem] pr-[1rem] border-l-4 border-mainGreen bg-[#f8fafc] dark:bg-[#1E1E1E]"
               />
             ),
-            code: ({ style, inline, node, children, ...props }) => {
+            code: ({ style, inline, node, children, className, ...props }) => {
               if (inline) {
                 return (
                   <code
@@ -96,9 +96,10 @@ export default function Post({ children }: { children: string }) {
                   </code>
                 );
               }
+              const match = /language-(\w+)/.exec(className || "") || "";
               return (
                 <SyntaxHighlighter
-                  language="javascript"
+                  language={match[1]}
                   style={vscDarkPlus}
                   showLineNumbers={true}
                   PreTag="div"
