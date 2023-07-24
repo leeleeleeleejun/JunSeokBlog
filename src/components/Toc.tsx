@@ -32,7 +32,6 @@ export default function Toc({ TocArray }: { TocArray: string[][] }) {
       <ul className="font-light">
         {TocArray.map((item, index) => {
           const level: level = levelArray.indexOf(item[1]) as level;
-
           return (
             <li
               key={index}
