@@ -1,0 +1,151 @@
+---
+title: "Next.js에서 Routing하기"
+description: "Next.js 13 버전을 기준으로 하고 있습니다."
+date: "2023/07/26"
+readTime: "12분"
+tags: ["Next.js", "Study"]
+---
+
+리액트에서는 라우터를 제공하지 않기 때문에 react-router-dom이라는 패키지를 설치하여 사용합니다.
+
+하지만 Next.js는 폴더 위치와 page라는 컴포넌트를 토대로 라우팅이 생성됩니다.
+
+## Static Routes (정적 라우팅)
+
+![](/images/posts/next/ROUTING-NEXTJS/1.png)
+
+만약 `/dashboard` 으로 url을 설정하고 싶다면,
+app 폴더를 하위에 dashboard폴더를 생성하고 page라는 컴포넌트를 생성하면 됩니다.
+그럼 폴더의 이름으로 자동으로 url경로가 설정됩니다.
+마찬가진롤 하위 폴더를 생성하는 방식으로 path를 설정할 수 있습니다.
+직관적으로 알기 쉽다는 장점이 있는 것 같습니다.
+
+![](/images/posts/next/ROUTING-NEXTJS/2.png)
+
+## Special Files (파일들의 역할)
+
+또 Next.js 13버전의 좋은 점으로 따로 **레이아웃, 로딩페이지, 에러페이지** 등 기능을 따로 설정하지 않고 파일 생성으로만 동작이 된다는 것 입니다.
+
+### layout (.js, .jsx, or .tsx)
+
+- 하위에 있는 폴더에 공유되는 공통 UI 설정 ex) header, footer
+- 레이아웃은 중첩됩니다.
+- app/ 디렉토리 최상위 경로에 정의한 layout.tsx는 Root Layout이고 이 파일은 반드시 필요합니다.
+- Root Layout은 `<html>`, `<body>` 태그를 반드시 포함해야 합니다.
+- layout은 state를 유지합니다.
+
+**중첩 레이아웃 상황**
+![](/images/posts/next/ROUTING-NEXTJS/3.png)
+
+### template (.js, .jsx, or .tsx)
+
+- template은 layout과 비슷한 역할을 하지만 state가 보존되는 Layout과는 달리 항상 새로운 children을 생성합니다.
+- 특별한 이유가 없다면 layout을 쓰는 것을 권장합니다.
+
+### page (.js, .jsx, or .tsx)
+
+- 화면에 표시되는 페이지 UI를 담당합니다.
+
+### loading (.js, .jsx, or .tsx)
+
+- 현재 경로와 하위 경로의 page가 contents를 받아오기 까지 Loading UI를 담당합니다.
+- page파일의 영역만 포함됨 (layout영역 제외)
+- ![](/images/posts/next/ROUTING-NEXTJS/4.png)
+
+### not-found (.js, .jsx, or .tsx)
+
+- 현재 경로와 하위 경로의 Not found UI를 담당합니다.
+- 404HTTP 상태 코드도 반환합니다
+
+### error (.js, .jsx, or .tsx)
+
+- 현재 경로와 하위 경로의 Error UI를 담당합니다.
+- page파일의 영역만 포함됩니다. (layout영역 제외)
+
+### global-error (.js, .jsx, or .tsx)
+
+- 루트 레이아웃에서의 Error UI를 담당합니다.
+- 루트 레이아웃을 대신하기 때문에 `<html>`, `<body>`을 포함해서 작성해야 합니다.
+
+```js
+'use client'
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error
+  reset: () => void
+}) {
+  return (
+    <html>
+      <body>
+        <h2>Something went wrong!</h2>
+        <button onClick={() => reset()}>Try again</button>
+      </body>
+    </html>
+  )
+}
+```
+
+---
+
+## Route Groups
+
+- 실제 Route엔 영향을 주지 않고 그룹화를 하고 싶을 때 사용합니다.
+- 사용하고 싶은 폴더이름을 소괄호로 감싸 사용합니다. `(folderName)`
+- Route에 영향을 주지 않고 layout을 한번 더 감싸고 싶을 때 유용하게 사용할 수 있습니다.
+  ![](/images/posts/next/ROUTING-NEXTJS/5.png)
+
+---
+
+## Dynamic Routes (동적 라우팅)
+
+- 정확한 path 이름을 미리 알지 못하고 동적 데이터에서 경로를 생성하려는 경우 사용할 수 있는 기능입니다.
+- 사용하고 싶은 폴더이름을 대괄호로 감싸 사용합니다. `[folderName]`
+
+```js
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>;
+}
+```
+
+| Route                     | 예시 URL  | params          |
+| ------------------------- | --------- | --------------- |
+| `app/blog/[slug]/page.js` | `/blog/a` | `{ slug: 'a' }` |
+
+### Catch-all Segments
+
+- 동적 세그먼트를 모든 후속 path로 확장할 수 있습니다.
+  `[...folderName]`
+- spread문법과 유사합니다. 마찬가지로 폴더 최하위에서만 사용해야 합니다.
+
+| Route                        | 예시 URL      | params                      |
+| ---------------------------- | ------------- | --------------------------- |
+| `app/blog/[...slug]/page.js` | `/blog/a`     | `{ slug: ['a'] }`           |
+| `app/blog/[...slug]/page.js` | `/blog/a/b`   | `{ slug: ['a', 'b'] }`      |
+| `app/blog/[...slug]/page.js` | `/blog/a/b/c` | `{ slug: ['a', 'b', 'c'] }` |
+
+### Optional Catch-all Segments
+
+- Catch-all Segments는 Segment가 없다면 에러가 발생 합니다.
+- 하지만 `[]`로 한번 더 감싸준다면, Segment가 optional의 성격을 가지게 됩니다. `[[...folderName]]`
+- optional을 사용하면 차이점으로 매개변수가 없는 경로도 에러가 발생하지 않고 일치한다는 것입니다.
+
+```
+// 만약 Optional 기능이 없었다면
+// shop페이지와 하위 페이지를 구분해서 만들어야 합니다.
+- shop
+	- page.tsx
+	-[sulg]
+    	-page.tsx
+
+// Optional 기능 사용
+- shop
+	- [[...sulg]]
+    	- page.tsx
+```
+
+### 참고
+
+> https://nextjs.org/docs/app/building-your-application/routing
