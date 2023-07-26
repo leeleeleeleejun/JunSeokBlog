@@ -1,6 +1,7 @@
 import { getAllPosts, getPostCategories, getPostBySlug } from "../../lib/api";
 import Tag from "@/components/Tag";
 import Post from "@/components/PostContent";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -41,6 +42,8 @@ export default function Page({ params }: { params: { slug: string[] } }) {
     "tags",
     "content",
   ]);
+
+  if (Object.keys(post).length < 1) notFound();
   const tags = Array.from(post.tags);
 
   return (

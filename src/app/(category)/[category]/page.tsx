@@ -1,6 +1,7 @@
 import PostItem from "@/components/PostItem";
 import { getPostsByCategory } from "@/lib/api";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -36,6 +37,9 @@ export default function CategoryPage({
     "tags",
     "readTime",
   ]);
+
+  if (getCategories.length < 1) notFound();
+
   return (
     <ul>
       {getCategories.map((post, index) => (
