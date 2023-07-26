@@ -27,7 +27,7 @@ export default function Toc({ TocArray }: { TocArray: string[][] }) {
   }, []);
 
   return (
-    <aside className="fixed top-[250px] w-[250px] max-h-[500px] max-xl:hidden ml-[950px] p-[20px] text-sm max-xl:ml-[900px] overflow-y-auto">
+    <aside className="fixed top-[150px] w-[260px] max-h-[600px] max-xl:hidden ml-[950px] p-[20px] text-sm max-xl:ml-[900px] overflow-y-auto">
       <p className="font-semibold mb-[10px]">On this page</p>
       <ul className="font-light">
         {TocArray.map((item, index) => {
