@@ -8,62 +8,49 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Post({ children }: { children: string }) {
-  const TocArray: string[][] = [];
   return (
     <>
-      <div className="w-[100%] max-md:text-sm">
+      <Toc />
+      <div className="w-[100%] mt-[70px] max-md:text-sm">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            h1: ({ node, ...props }) => {
-              TocArray.push([`${props.children[0]}`, "1"]);
-              return (
-                <Link href={`#${props.children[0]}`}>
-                  <h1
-                    {...props}
-                    className="text-h1 my-[0.67em] pt-[50px] font-bold leading-[initial]"
-                    id={`${props.children[0]}`}
-                  />
-                </Link>
-              );
-            },
-            h2: ({ node, ...props }) => {
-              TocArray.push([`${props.children[0]}`, "2"]);
-              return (
-                <Link href={`#${props.children[0]}`}>
-                  <h2
-                    {...props}
-                    className="text-h2 my-[0.83em] pt-[50px] font-bold leading-[initial]"
-                    id={`${props.children[0]}`}
-                  />
-                </Link>
-              );
-            },
-            h3: ({ node, ...props }) => {
-              TocArray.push([`${props.children[0]}`, "3"]);
-              return (
-                <Link href={`#${props.children[0]}`}>
-                  <h3
-                    {...props}
-                    className="text-h3 my-[1em] pt-[50px] font-bold leading-[initial]"
-                    id={`${props.children[0]}`}
-                  />
-                </Link>
-              );
-            },
-            h4: ({ node, ...props }) => {
-              TocArray.push([`${props.children[0]}`, "4"]);
-              return (
-                <Link href={`#${props.children[0]}`}>
-                  <h4
-                    {...props}
-                    className="text-h4 my-[1em] pt-[50px] font-bold leading-[initial]"
-                    id={`${props.children[0]}`}
-                  />
-                </Link>
-              );
-            },
-
+            h1: ({ node, ...props }) => (
+              <Link href={`#${props.children[0]}`}>
+                <h1
+                  {...props}
+                  className="text-h1 my-[0.67em] pt-[50px] font-bold leading-[initial]"
+                  id={`${props.children[0]}`}
+                />
+              </Link>
+            ),
+            h2: ({ node, ...props }) => (
+              <Link href={`#${props.children[0]}`}>
+                <h2
+                  {...props}
+                  className="text-h2 my-[0.83em] pt-[50px] font-bold leading-[initial]"
+                  id={`${props.children[0]}`}
+                />
+              </Link>
+            ),
+            h3: ({ node, ...props }) => (
+              <Link href={`#${props.children[0]}`}>
+                <h3
+                  {...props}
+                  className="text-h3 my-[1em] pt-[50px] font-bold leading-[initial]"
+                  id={`${props.children[0]}`}
+                />
+              </Link>
+            ),
+            h4: ({ node, ...props }) => (
+              <Link href={`#${props.children[0]}`}>
+                <h4
+                  {...props}
+                  className="text-h4 my-[1em] pt-[50px] font-bold leading-[initial]"
+                  id={`${props.children[0]}`}
+                />
+              </Link>
+            ),
             h5: ({ node, ...props }) => (
               <h5 {...props} className="text-h5 font-bold my-[1.67em]" />
             ),
@@ -143,7 +130,6 @@ export default function Post({ children }: { children: string }) {
           {children}
         </ReactMarkdown>
       </div>
-      <Toc TocArray={TocArray} />
     </>
   );
 }

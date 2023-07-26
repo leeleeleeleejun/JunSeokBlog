@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export const getIntersectionObserver = (
-  setActive: Dispatch<SetStateAction<string>>
+  setActive: Dispatch<SetStateAction<string|null>>
 ) => {
   const observer = new IntersectionObserver(
     (entries) => {

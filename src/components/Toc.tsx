@@ -1,7 +1,7 @@
 "use client";
 import { getIntersectionObserver } from "@/lib/getIntersectionObserver";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const padding = {
   0: "",
   1: "pl-1",
@@ -11,41 +11,63 @@ const padding = {
 
 type level = 0 | 1 | 2 | 3;
 
-export default function Toc({ TocArray }: { TocArray: string[][] }) {
-  const [active, setActive] = useState("");
+export default function Toc() {
+  const [active, setActive] = useState<string | null>("");
+  const [headingEls, setHeadingEls] = useState<Element[]>([]);
+  const [isFixed, setIsFixed] = useState<boolean>(false);
+
+  const TocEl = useRef<HTMLElement>(null);
   const levelArray = Array.from(
-    new Set<string>(TocArray.map((item) => item[1]))
-  ).sort();
+    new Set<string>(headingEls.map((el) => el.tagName).sort())
+  );
+
   useEffect(() => {
     const observer = getIntersectionObserver(setActive);
     const headingElements = Array.from(
       document.querySelectorAll("h1, h2, h3, h4")
     );
+    setHeadingEls(headingElements);
     headingElements.map((header) => {
       observer.observe(header);
     });
   }, []);
+  useEffect(() => {
+    if (!TocEl.current) return;
+    const top = TocEl.current.getBoundingClientRect().top;
+
+    const onScroll = () => {
+      const scrollPosition = scrollY + 100;
+      if (scrollPosition >= top) setIsFixed(true);
+      else setIsFixed(false);
+    };
+
+    document.addEventListener("scroll", onScroll, { passive: true });
+  }, []);
+  const fixedStyle = isFixed ? "fixed top-[100px]" : "absolute";
 
   return (
-    <aside className="fixed top-[150px] w-[260px] max-h-[600px] max-xl:hidden ml-[950px] p-[20px] text-sm max-xl:ml-[900px] overflow-y-auto">
+    <aside
+      ref={TocEl}
+      className={`${fixedStyle} w-[260px] max-h-[600px] max-xl:hidden ml-[950px] p-[20px] text-sm max-xl:ml-[900px] overflow-y-auto`}
+    >
       <p className="font-semibold mb-[10px]">On this page</p>
       <ul className="font-light">
-        {TocArray.map((item, index) => {
-          const level: level = levelArray.indexOf(item[1]) as level;
+        {headingEls.map((item, index) => {
+          const level: level = levelArray.indexOf(item.tagName) as level;
           return (
             <li
               key={index}
               className={`mb-[3px] hover:text-mainGreen ${padding[level]} ${
-                item[0] === active ? "text-mainGreen" : ""
+                item.textContent === active ? "text-mainGreen" : ""
               }`}
             >
               <Link
-                href={`#${item[0]}`}
+                href={`#${item.textContent}`}
                 onClick={() => {
-                  setActive(item[0]);
+                  setActive(item.textContent);
                 }}
               >
-                {item[0]}
+                {item.textContent}
               </Link>
             </li>
           );

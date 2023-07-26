@@ -12,20 +12,21 @@ export default function Header() {
   const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const moving = window.scrollY;
-      setVisible(position > moving);
-      setPosition(moving);
-    };
     let timer: NodeJS.Timeout | null;
-    window.addEventListener("scroll", () => {
+
+    const handleScroll = () => {
       if (!timer) {
         timer = setTimeout(() => {
           timer = null;
-          handleScroll();
+          const moving = window.scrollY;
+          setVisible(position > moving);
+          setPosition(moving);
         }, 200);
       }
-    });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
