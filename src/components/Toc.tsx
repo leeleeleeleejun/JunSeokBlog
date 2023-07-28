@@ -23,7 +23,9 @@ export default function Toc() {
 
   useEffect(() => {
     const observer = getIntersectionObserver(setActive);
-    const headingElements = Array.from(document.querySelectorAll("h2, h3, h4"));
+    const headingElements = Array.from(
+      document.querySelectorAll("h1, h2, h3, h4")
+    );
     setHeadingEls(headingElements);
     headingElements.map((header) => {
       observer.observe(header);
