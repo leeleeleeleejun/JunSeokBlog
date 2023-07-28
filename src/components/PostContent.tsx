@@ -16,13 +16,10 @@ export default function Post({ children }: { children: string }) {
           remarkPlugins={[remarkGfm]}
           components={{
             h1: ({ node, ...props }) => (
-              <Link href={`#${props.children[0]}`}>
-                <h1
-                  {...props}
-                  className="text-h1 my-[0.67em] pt-[50px] font-bold leading-[initial]"
-                  id={`${props.children[0]}`}
-                />
-              </Link>
+              <h1
+                {...props}
+                className="text-h1 my-[0.67em] pt-[50px] font-bold leading-[initial]"
+              />
             ),
             h2: ({ node, ...props }) => (
               <Link href={`#${props.children[0]}`}>
