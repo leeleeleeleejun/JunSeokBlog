@@ -1,3 +1,4 @@
+import Pagination from "@/components/Pagination";
 import PostList from "@/components/PostList";
 import { getPostsByCategory } from "@/lib/api";
 import { Metadata } from "next";
@@ -26,9 +27,10 @@ export async function generateMetadata({
 export default function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: { category: string[] };
 }) {
-  const getPosts = getPostsByCategory(params.category, [
+  const [category, group] = params.category;
+  const getPosts = getPostsByCategory(category, [
     "category",
     "slug",
     "title",
@@ -40,5 +42,14 @@ export default function CategoryPage({
 
   if (getPosts.length < 1) notFound();
 
-  return <PostList posts={getPosts} group={1} />;
+  return (
+    <>
+      <PostList posts={getPosts} group={Number(group)} />
+      <Pagination
+        totalPosts={getPosts.length}
+        currPage={Number(group)}
+        category={category}
+      />
+    </>
+  );
 }
