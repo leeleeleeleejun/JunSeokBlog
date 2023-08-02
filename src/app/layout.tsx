@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: "이준석의 개발 블로그입니다",
     locale: "ko-KR",
     siteName: "JunSeok-blog.com",
-    url: "https://JunSeok-blog.com",
+    url: "https://junseok-blog.vercel.app/",
     type: "website",
   },
   verification: {
@@ -54,7 +54,7 @@ export default function RootLayout({
             </Link>
           </nav>
           <p className="mt-[10px] text-center">
-            JunSeok Lee • © 2023 • https://junseok-blog.com
+            JunSeok Lee • © 2023 • https://junseok-blog.vercel.app
           </p>
         </footer>
       </body>

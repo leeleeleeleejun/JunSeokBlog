@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "이준석의 개발 블로그입니다",
     locale: "ko-KR",
     siteName: "JunSeok-blog.com",
-    url: "https://JunSeok-blog.com/about",
+    url: "https://junseok-blog.vercel.app/about",
     type: "profile",
   },
 };

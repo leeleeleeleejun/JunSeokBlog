@@ -1,4 +1,8 @@
-import { getAllPosts, getPostCategories, getPostBySlug } from "../../lib/api";
+import {
+  getAllPosts,
+  getPostCategories,
+  getPostBySlug,
+} from "../../../lib/api";
 import Tag from "@/components/Tag";
 import Post from "@/components/PostContent";
 import { notFound } from "next/navigation";
@@ -26,7 +30,7 @@ export async function generateMetadata({
       description: `${slug}에 관해`,
       locale: "ko-KR",
       siteName: "JunSeok-blog.com",
-      url: `https://JunSeok-blog.com/${category}/${slug}`,
+      url: `https://junseok-blog.vercel.app/post/${category}/${slug}`,
       type: "article",
     },
   };
