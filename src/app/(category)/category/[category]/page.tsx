@@ -1,4 +1,4 @@
-import PostItem from "@/components/PostItem";
+import PostList from "@/components/PostList";
 import { getPostsByCategory } from "@/lib/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -28,7 +28,7 @@ export default function CategoryPage({
 }: {
   params: { category: string };
 }) {
-  const getCategories = getPostsByCategory(params.category, [
+  const getPosts = getPostsByCategory(params.category, [
     "category",
     "slug",
     "title",
@@ -38,21 +38,7 @@ export default function CategoryPage({
     "readTime",
   ]);
 
-  if (getCategories.length < 1) notFound();
+  if (getPosts.length < 1) notFound();
 
-  return (
-    <ul>
-      {getCategories.map((post, index) => (
-        <PostItem
-          key={index}
-          category={post.category}
-          slug={post.slug}
-          title={post.title}
-          description={post.description}
-          date={post.date}
-          readTime={post.readTime}
-        />
-      ))}
-    </ul>
-  );
+  return <PostList posts={getPosts} group={1} />;
 }

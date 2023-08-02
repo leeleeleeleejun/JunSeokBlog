@@ -12,7 +12,9 @@ export default function Categories({
   }[];
 }) {
   const pathname = usePathname();
-  const isActive = pathname === "/";
+  // 페이지 네이션 경우 / 뒤에 숫자가 붙을 수 있기때문에 정규식으로 분리
+  const pattern = /^\/(\d+)?$/;
+  const isActive = pattern.test(pathname);
 
   return (
     <aside className="flex flex-col min-[1200px]:absolute top-[120px] left-[-16%] mb-[10px]">
@@ -26,11 +28,12 @@ export default function Categories({
           {`All`}
         </Category>
         {categories.map((item, index) => {
-          const isActive = pathname.startsWith("/" + item.category);
+          const url = `/category/${item.category}`;
+          const isActive = pathname.startsWith(url);
           return (
             <Category
               key={index}
-              href={`/${item.category}`}
+              href={url}
               quantity={item.quantity}
               isActive={isActive}
             >

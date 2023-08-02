@@ -1,5 +1,6 @@
+import PostList from "@/components/PostList";
+import Pagination from "@/components/Pagination";
 import { getAllPosts, getPostCategories } from "../../lib/api";
-import PostItem from "@/components/PostItem";
 
 export default function Home() {
   const getCategories = getPostCategories();
@@ -12,19 +13,11 @@ export default function Home() {
     "readTime",
     "tags",
   ]);
+
   return (
-    <ul className="w-[100%]">
-      {posts.map((post, index) => (
-        <PostItem
-          key={index}
-          category={post.category}
-          slug={post.slug}
-          title={post.title}
-          description={post.description}
-          date={post.date}
-          readTime={post.readTime}
-        />
-      ))}
-    </ul>
+    <>
+      <PostList posts={posts} group={1} />
+      <Pagination totalPosts={posts.length} currPage={1} />
+    </>
   );
 }

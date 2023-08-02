@@ -33,6 +33,10 @@ export function getPostsByCategory(category: string, fields: string[] = []) {
   }
 }
 
+export type Items = {
+  [key: string]: string;
+};
+
 export function getPostBySlug(
   category: string,
   slug: string,
@@ -43,10 +47,6 @@ export function getPostBySlug(
     const fullPath = join(rootPostDirectory, category, `${realSlug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
-    type Items = {
-      [key: string]: string;
-    };
-
     const items: Items = {};
 
     // Ensure only the minimal needed data is exposed
@@ -64,7 +64,6 @@ export function getPostBySlug(
         items[field] = data[field];
       }
     });
-
     return items;
   } catch (error) {
     return {};
