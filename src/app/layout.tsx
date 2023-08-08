@@ -2,9 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import GitHubIcon from "@/components/icons/GitHubIcon";
-import MailIcon from "@/components/icons/MailIcon";
-import VelogIcon from "@/components/icons/VelogIcon";
+import GitHubIcon from "@/assets/GitHubIcon.svg";
+import MailIcon from "@/assets/MailIcon.svg";
+import VelogIcon from "@/assets/VelogIcon.svg";
 import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -43,13 +43,25 @@ export default function RootLayout({
         </main>
         <footer className="flex flex-col mt-[150px] py-[30px] text-xs text-gray-400">
           <nav className="flex justify-center">
-            <Link href="https://github.com/leeleeleeleejun" target="_blank">
+            <Link
+              href="https://github.com/leeleeleeleejun"
+              target="_blank"
+              className="mx-[7px]"
+            >
               <GitHubIcon />
             </Link>
-            <Link href="mailto:wnstjr6293@gmail.com" target="_blank">
+            <Link
+              href="mailto:wnstjr6293@gmail.com"
+              target="_blank"
+              className="mx-[7px]"
+            >
               <MailIcon />
             </Link>
-            <Link href="https://velog.io/@leeleeleeleejun" target="_blank">
+            <Link
+              href="https://velog.io/@leeleeleeleejun"
+              target="_blank"
+              className="mx-[7px]"
+            >
               <VelogIcon />
             </Link>
           </nav>

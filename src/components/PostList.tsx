@@ -1,5 +1,5 @@
 import PostItem from "./PostItem";
-import { Items } from "../lib/api";
+import { Items } from "@/lib/api";
 
 export default function PostList({
   posts,

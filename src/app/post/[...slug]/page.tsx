@@ -1,8 +1,4 @@
-import {
-  getAllPosts,
-  getPostCategories,
-  getPostBySlug,
-} from "../../../lib/api";
+import { getAllPosts, getPostCategories, getPostBySlug } from "@/lib/api";
 import Tag from "@/components/Tag";
 import Post from "@/components/PostContent";
 import { notFound } from "next/navigation";

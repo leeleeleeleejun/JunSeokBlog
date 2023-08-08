@@ -1,8 +1,8 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import LightIcon from "./icons/lightIcon";
-import DarkIcon from "./icons/DarkIcon";
+import DarkIcon from "@/assets/DarkIcon.svg";
+import LightIcon from "@/assets/LightIcon.svg";
 
 type theme = "dark" | "light";
 

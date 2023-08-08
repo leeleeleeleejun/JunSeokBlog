@@ -1,5 +1,6 @@
-import CalendarIcon from "./icons/CalendarIcon";
-import ClockIcon from "./icons/ClockIcon";
+// import CalendarIcon from "./icons/CalendarIcon";
+import ClockIcon from "@/assets/ClockIcon.svg";
+import CalendarIcon from "@/assets/CalendarIcon.svg";
 export default function PostInfo({
   date,
   readTime,
