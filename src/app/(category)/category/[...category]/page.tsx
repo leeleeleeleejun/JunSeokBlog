@@ -1,8 +1,20 @@
 import Pagination from "@/components/Pagination";
 import PostList from "@/components/PostList";
-import { getPostsByCategory } from "@/lib/api";
+import { getPostsByCategory, getPostCategories } from "@/lib/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const getCategories = getPostCategories();
+
+  return getCategories.map((category) => {
+    const totalPage = Math.ceil(getPostsByCategory(category, []).length / 5);
+    const array = Array(totalPage)
+      .fill(1)
+      .map((item, index) => ({ category: [category, item + index] }));
+    return array;
+  });
+}
 
 export async function generateMetadata({
   params,

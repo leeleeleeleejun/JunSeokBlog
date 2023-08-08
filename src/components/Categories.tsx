@@ -28,7 +28,7 @@ export default function Categories({
           {`All`}
         </Category>
         {categories.map((item, index) => {
-          const url = `/category/${item.category}`;
+          const url = `/category/${item.category}/1`;
           const isActive = pathname.startsWith(url);
           return (
             <Category
