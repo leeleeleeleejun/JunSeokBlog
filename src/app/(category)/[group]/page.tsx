@@ -1,7 +1,18 @@
 import Pagination from "@/components/Pagination";
 import PostList from "@/components/PostList";
+import { getAllPosts, getPostCategories } from "@/lib/api";
 import { notFound } from "next/navigation";
-import { posts } from "@/app/(category)/page";
+
+const getCategories = getPostCategories();
+const posts = getAllPosts(getCategories, [
+  "category",
+  "slug",
+  "title",
+  "description",
+  "date",
+  "readTime",
+  "tags",
+]);
 
 export async function generateStaticParams() {
   const totalPage = Math.ceil(posts.length / 5) - 1;

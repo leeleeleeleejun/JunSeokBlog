@@ -3,7 +3,7 @@ import PostList from "@/components/PostList";
 import { getAllPosts, getPostCategories } from "@/lib/api";
 
 const getCategories = getPostCategories();
-export const posts = getAllPosts(getCategories, [
+const posts = getAllPosts(getCategories, [
   "category",
   "slug",
   "title",
