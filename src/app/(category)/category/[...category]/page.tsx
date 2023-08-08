@@ -30,6 +30,8 @@ export default function CategoryPage({
   params: { category: string[] };
 }) {
   const [category, group] = params.category;
+  const numGroup = Number(group);
+
   const getPosts = getPostsByCategory(category, [
     "category",
     "slug",
@@ -42,14 +44,15 @@ export default function CategoryPage({
 
   const totalPage = Math.ceil(getPosts.length / 5);
 
-  if (getPosts.length < 1 || Number(group) > totalPage) notFound();
+  if (getPosts.length < 1 || numGroup > totalPage || isNaN(numGroup))
+    notFound();
 
   return (
     <>
-      <PostList posts={getPosts} group={Number(group)} />
+      <PostList posts={getPosts} group={numGroup} />
       <Pagination
         totalPage={totalPage}
-        currPage={Number(group)}
+        currPage={numGroup}
         category={category}
       />
     </>

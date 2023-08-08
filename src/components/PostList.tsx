@@ -8,9 +8,6 @@ export default function PostList({
   posts: Items[];
   group: number;
 }) {
-  if (isNaN(group)) {
-    group = 1;
-  }
   return (
     <ul className="w-[100%] h-[650px]">
       {posts.slice((group - 1) * 5, group * 5).map((post, index) => (

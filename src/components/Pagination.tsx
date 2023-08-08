@@ -15,9 +15,7 @@ export default function Pagination({
       {Array(totalPage)
         .fill(0)
         .map((_, i) => {
-          // 메인페이지 경우 1로 표시
-          const currPath = isNaN(currPage) ? 1 : currPage;
-          const isActive = i + 1 === currPath;
+          const isActive = i + 1 === currPage;
           return (
             <li
               key={i}
