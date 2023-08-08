@@ -2,15 +2,14 @@
 import Link from "next/link";
 
 export default function Pagination({
-  totalPosts,
+  totalPage,
   currPage,
   category,
 }: {
-  totalPosts: number;
+  totalPage: number;
   currPage: number;
   category?: string;
 }) {
-  const totalPage = Math.ceil(totalPosts / 5);
   return (
     <ul className="flex justify-center mt-[50px]">
       {Array(totalPage)
