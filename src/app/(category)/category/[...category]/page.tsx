@@ -11,7 +11,7 @@ export async function generateStaticParams() {
     const totalPage = Math.ceil(getPostsByCategory(category, []).length / 5);
     const array = Array(totalPage)
       .fill(1)
-      .map((item, index) => ({ category: [category, item + index] }));
+      .map((item, index) => ({ category: [category, `${item + index}`] }));
     return array;
   });
 }

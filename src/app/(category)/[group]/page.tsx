@@ -18,7 +18,7 @@ export async function generateStaticParams() {
   const totalPage = Math.ceil(posts.length / 5) - 1;
   const array = Array(totalPage)
     .fill(2)
-    .map((item, index) => ({ group: item + index }));
+    .map((item, index) => ({ group: `${item + index}` }));
   return array;
 }
 
