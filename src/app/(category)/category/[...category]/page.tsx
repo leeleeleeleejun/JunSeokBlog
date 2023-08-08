@@ -40,13 +40,15 @@ export default function CategoryPage({
     "readTime",
   ]);
 
-  if (getPosts.length < 1) notFound();
+  const totalPage = Math.ceil(getPosts.length / 5);
+
+  if (getPosts.length < 1 || Number(group) > totalPage) notFound();
 
   return (
     <>
       <PostList posts={getPosts} group={Number(group)} />
       <Pagination
-        totalPosts={getPosts.length}
+        totalPage={totalPage}
         currPage={Number(group)}
         category={category}
       />
