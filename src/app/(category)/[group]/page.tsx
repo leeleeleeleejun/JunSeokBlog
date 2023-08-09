@@ -27,7 +27,7 @@ export default function Page({ params }: { params: { group: string } }) {
   const numGroup = Number(group);
   const totalPage = Math.ceil(posts.length / 5);
 
-  if (isNaN(numGroup) || numGroup > totalPage) notFound();
+  if (isNaN(numGroup) || numGroup > totalPage || numGroup <= 0) notFound();
 
   return (
     <>

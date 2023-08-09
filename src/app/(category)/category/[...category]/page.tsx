@@ -56,7 +56,12 @@ export default function CategoryPage({
 
   const totalPage = Math.ceil(getPosts.length / 5);
 
-  if (getPosts.length < 1 || numGroup > totalPage || isNaN(numGroup))
+  if (
+    getPosts.length < 1 ||
+    numGroup > totalPage ||
+    numGroup <= 0 ||
+    isNaN(numGroup)
+  )
     notFound();
 
   return (
