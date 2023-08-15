@@ -1,0 +1,85 @@
+---
+title: "Next.js에서 Rendering하기"
+description: "Next.js 13 버전을 기준으로 하고 있습니다."
+date: "2023/08/15"
+readTime: "7분"
+tags: ["Next.js", "Study"]
+---
+
+## 먼저 렌더링이란 무엇일까요??
+
+Next.js에선 리액트에서 작성한 코드를 UI의 HTML 표현으로 변환하기 위한 작업을 렌더링이라 칭합니다.
+렌더링은 서버와 클라이언트 두가지 장소에서 이루어질 수 있습니다.
+그리고 Next.js는 3가지의 렌더링 방식을 지원합니다.
+
+- `Server-Side Rendering`
+- `Static Site Generation`
+- `Client-Side Rendering`
+
+## Pre-Rendering
+
+데이터를 미리 요청하고 리액트 컴포넌트들을 미리 HTML로 생성 후 클라이언트에게 전송합니다. 해당 과정을 Pre-Rendering이라 합니다.
+
+### Pre-Rendering 사용 이유!
+
+사용자가 페이지에 접근하기 전에 미리 페이지의 내용을 생성해놓기 때문에 **초기 로딩 속도를 향상**시키고 **SEO에 유리한** 페이지를 제공할 수 있습니다.
+
+## Client-Side Rendering vs. Pre-Rendering
+
+**Client-Side Rendering**
+
+사진에서 이해가 쉽도록 표현이 잘 되어 있습니다.
+처음에 브라우저가 빈 HTML을 파일을 받아 아무것도 보여주지 않다가,
+사용자의 기기에서 렌더링이 진행되어 한 번에 화면을 보여줍니다.
+![](/images/posts/next/RENDERING-NEXTJS/1.png)
+
+**Pre-Rendering**
+
+해당 렌더링은 처음부터 완성된 HTML을 보여주므로 바로 완성된 화면을 볼 수 있습니다.
+그 후 Hydration과정을 거치고 사용자와 상호작용할 수 있는 웹페이지가 완성됩니다.
+
+![](/images/posts/next/RENDERING-NEXTJS/2.png)
+
+### Server-Side Rendering VS Static Site Generation
+
+`Server-Side Rendering`과 `Static Site Generation` 방식이 Pre-rendering의 방식입니다.
+SSR과 SSG의 차이점은 ‘HTML 파일을 생성하는 시점’입니다.
+
+- `Server-Side Rendering` : 각 요청마다 HTML 생성
+
+- `Static Site Generation` : 빌드 타임시 생성, pre-render된 HTML은 각 요청마다 재사용
+
+각 렌더링 방식의 특징과 권장 사용 사례에 대한 자세한 내용은 해당 [포스트](https://junseok-blog.vercel.app/post/React/SPA-MPA_CSR-SSR)에서 확인하실 수 있습니다.
+
+## SSG, SSR 사용하기
+
+Next.js는 성능을 향상시키기 위해 기본값으로 Static Rendering을 사용합니다.
+그렇다면 SSR페이지는 어떻게 사용할 수 있을까요?
+이전에 에러가 발생하고 해결하면서 이전 [포스트](https://junseok-blog.vercel.app/post/Next/STATIC-RENDERING)에 잠깐 등장했었습니다ㅎㅎ,,
+만약 동적라우팅한 페이지가 배포 시 에러가 난다면 한번 확인해보시면 좋을 것 같습니다!
+
+- **SSG**: `fetch(URL, { cache: 'force-cache' });`
+- **SSR**: `fetch(URL, { cache: 'no-store' });` , `fetch(URL, { next: { revalidate: 0 } })`
+
+```js
+// SSG
+// force-cache가 디폴트 값이므로 생략이 가능합니다.
+// 그리고 애초에 Next.js는 기본값으로 Static Rendering을 사용하기
+// 때문에 SSG를 사용하신다면 해당 fetch처리하지 않아도 됩니다.
+async function getData() {
+  const res = await fetch("https://api.example.com/...");
+  const data = await res.json();
+  return data;
+}
+
+// SSR
+async function getData() {
+  const res = await fetch("https://api.example.com/...", { cache: "no-store" });
+  const data = await res.json();
+  return data;
+}
+```
+
+### 참고
+
+> https://nextjs.org/learn/foundations/how-nextjs-works/rendering > https://nextjs.org/learn/basics/data-fetching/pre-rendering
