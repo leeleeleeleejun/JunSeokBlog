@@ -8,7 +8,7 @@ Next.js를 이용한 SSG(Static Site Generation) 마크다운 블로그 입니�
 
 ## 기술 스택, 기술 선정 이유
 
-<img src='./public/images/Nextjs-logo.jpg' width=100 height=100 style="border-radius:10px">
+<img src='./public/images/Next-js.jpg' width=100 >
 
 ### Next.js
 
@@ -19,13 +19,17 @@ Next.js를 이용한 SSG(Static Site Generation) 마크다운 블로그 입니�
 > **라우팅 및 코드 스플리팅:**  
 >  Next.js는 내장된 라우팅 시스템을 제공하여 페이지 간 전환을 쉽게 할 수 있습니다. 또한 코드 스플리팅을 지원하여 필요한 컴포넌트만 로드해 초기 로딩 시간을 줄일 수 있습니다.
 
-<img src='./public/images/TS.jpg' width=100 height=100 style="border-radius:10px">
+<br/>
+
+<img src='./public/images/TS.jpg' width=100 >
 
 ### TypeScript
 
 > 정적 타입 시스템을 통해 코드의 안정성을 높이고 런타임 오류를 사전에 방지하여 코드 품질을 향상시킵니다.
 
-<img src='./public/images/tailwind-css.jpg' width=100 height=100 style="border-radius:10px">
+<br/>
+
+<img src='./public/images/tailwind-css.jpg' width=100 >
 
 ### Tailwind CSS
 
