@@ -28,7 +28,7 @@ export default function About() {
     <>
       <div className="flex justify-around items-center">
         <Link
-          href="https://www.notion.so/778ddfc9fd7b4ec4a770643d59f61044?pvs=4"
+          href="https://www.notion.so/Front-end-fc7bab4a1bd14187a9693358b55bdfd1?pvs=4"
           target="_blank"
         >
           <Image
