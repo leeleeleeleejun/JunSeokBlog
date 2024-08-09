@@ -3,6 +3,7 @@ import Tag from "@/components/Tag";
 import Post from "@/components/PostContent";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import {Giscus} from "@/components/Giscus";
 
 export async function generateStaticParams() {
   const getCategories = getPostCategories();
@@ -57,6 +58,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
         ))}
       </div>
       <Post>{post.content}</Post>
+      <Giscus/>
     </div>
   );
 }
