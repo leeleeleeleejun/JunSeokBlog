@@ -6,6 +6,7 @@ import GitHubIcon from "@/assets/GitHubIcon.svg";
 import MailIcon from "@/assets/MailIcon.svg";
 import VelogIcon from "@/assets/VelogIcon.svg";
 import Header from "@/components/Header";
+import {ThemeProvider} from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,17 +28,17 @@ export const metadata: Metadata = {
     },
   },
 };
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className="scroll-smooth">
-      <body
-        className={`${inter.className} dark:bg-darkModeBG dark:text-[white]`}
-      >
-        <Header />
+    <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
+    <body className={`${inter.className} dark:bg-darkModeBG dark:text-[white]`}>
+      <ThemeProvider attribute="class" enableSystem>
+        <Header/>
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
         </main>
@@ -48,28 +49,29 @@ export default function RootLayout({
               target="_blank"
               className="mx-[7px]"
             >
-              <GitHubIcon />
+              <GitHubIcon/>
             </Link>
             <Link
               href="mailto:wnstjr6293@gmail.com"
               target="_blank"
               className="mx-[7px]"
             >
-              <MailIcon />
+              <MailIcon/>
             </Link>
             <Link
               href="https://velog.io/@leeleeleeleejun"
               target="_blank"
               className="mx-[7px]"
             >
-              <VelogIcon />
+              <VelogIcon/>
             </Link>
           </nav>
           <p className="mt-[10px] text-center">
             JunSeok Lee • © 2023 • https://junseok-blog.vercel.app
           </p>
         </footer>
-      </body>
+      </ThemeProvider>
+    </body>
     </html>
   );
 }
