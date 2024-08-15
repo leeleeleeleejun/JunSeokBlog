@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
     <body className={`${inter.className} dark:bg-darkModeBG dark:text-[white]`}>
-      <ThemeProvider attribute="class" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
         <Header/>
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
