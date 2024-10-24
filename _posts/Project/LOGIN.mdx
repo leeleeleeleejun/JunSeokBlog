@@ -1,0 +1,186 @@
+---
+title: "사실 간단하지 못한 로그인 🔐"
+description: "이제부터라도 안전한 로그인을 위해 알아야할 세 가지"
+date: "2024/10/24"
+readTime: "10분"
+tags: ["Project"]
+---
+
+로그인은 개인 정보를 다루기 시작하는 중요한 과정이기 때문에 보안에 대한 신경을 많이 써야 합니다. 이번 글에서는 조금이라도 더 안전한 로그인을 구현하기 위해 알아야 할 내용들을 정리해보았습니다.
+
+### 안전한 로그인을 위한 세 가지 핵심 요소
+> **1. 로그인 구현 방식의 종류**
+> **2. 개인 정보를 위협하는 대표적인 공격**
+> **3. 안전한 인증 토큰 관리 방법**
+
+---
+# 로그인 구현 방식의 종류
+## 1. 세션(Session) 기반 로그인
+세션 기반 인증은 서버에서 사용자의 상태를 관리하는 전통적인 로그인 방식입니다.
+
+### 작동 원리
+1. 로그인 요청: 사용자가 아이디와 비밀번호를 서버에 전송합니다.
+2. 사용자 인증: 서버가 사용자 정보를 인증하고, 인증에 성공하면 고유한 세션 ID를 생성합니다.
+3. 세션 저장: 서버는 생성된 세션 ID를 저장해 사용자의 상태를 유지합니다.
+4. 쿠키에 세션 ID 저장: 서버는 클라이언트(브라우저)에 이 세션 ID를 쿠키에 저장하여 응답합니다.
+5. 이후 요청 처리: 사용자가 요청을 보낼 때마다 세션 ID가 담긴 쿠키가 서버로 전송되고, 서버는 이를 통해 사용자를 식별하고 요청을 처리합니다.
+
+
+## 2. JWT (Json Web Token) 기반 로그인
+JWT 기반 인증은 사용자가 인증에 성공한 후, 클라이언트가 인증 정보를 보유하고 서버에 전송하는 방식입니다. 상태를 서버가 아닌 클라이언트가 관리한다는 점이 세션 기반 인증과 다릅니다.
+
+### 작동 원리
+1. 로그인 요청: 사용자가 아이디와 비밀번호를 서버에 전송합니다.
+2. 사용자 인증: 서버는 사용자 인증 후 JWT를 생성합니다.
+3. 토큰 발급: JWT는 Header, Payload, Signature의 세 부분으로 구성됩니다.
+	- Header: 토큰의 타입과 해싱 알고리즘 정보
+	- Payload: 사용자의 인증 정보(예: 사용자 ID)
+	- Signature: 헤더와 페이로드를 비밀 키로 서명한 값
+4. JWT 반환: 서버는 이 JWT를 클라이언트에게 반환하고, 클라이언트는 이를 저장합니다(로컬 스토리지나 세션 스토리지).
+5. 이후 요청 처리: 클라이언트는 이후 요청마다 JWT를 Authorization 헤더에 담아 전송하고, 서버는 이를 검증하여 유효성을 확인한 후 요청을 처리합니다.
+
+
+----
+# 개인 정보를 위협하는 대표적인 공격
+## 1. XSS(크로스 사이트 스크립팅)
+XSS는 웹사이트의 보안 취약점을 악용하여 공격자가 악성 스크립트를 삽입하고 이를 통해 사용자의 브라우저에서 실행되는 공격입니다. 주로 사용자 입력을 제대로 검증하지 않는 웹 애플리케이션에서 발생하며, 공격자는 이를 통해 사용자의 세션 정보를 탈취하거나 악성 행동을 수행할 수 있습니다.
+> React는 공격자가 string에 html / Javascript를 담아 JSX에 삽입할 경우 자동으로 escape 처리한다.
+
+## 2. CSRF(크로스 사이트 요청 위조)
+CSRF는 인증된 사용자가 특정 웹사이트에 로그인된 상태에서, 공격자가 사용자의 권한을 악용해 원치 않는 요청을 보낼 수 있도록 유도하는 공격입니다. 이를 통해 데이터 수정, 트랜잭션 실행 등의 행동을 강제할 수 있으며, 사용자는 자신이 요청하지 않은 작업이 실행되는 피해를 입게 됩니다.
+
+---
+
+# 선택한 로그인 방식: JWT 기반 인증
+저는 JWT를 이용한 인증 방식을 선택했습니다. 이 방식에서는 Access Token과 Refresh Token을 사용하여 보안성을 높이고 사용자 경험을 개선할 수 있습니다.
+
+### Access Token과 Refresh Token의 역할
+**Access Token**: 사용자 인증을 담당하며, 만료 시간이 짧게 설정됩니다. 이렇게 하면 토큰이 탈취되어도 그 피해를 최소화할 수 있습니다.
+**Refresh Token**: Access Token이 만료되었을 때 이를 재발급받기 위해 사용됩니다. Refresh Token은 상대적으로 긴 만료 시간을 가지며, 사용자가 로그아웃 없이도 로그인 상태를 유지할 수 있도록 도와줍니다.
+
+
+### 취약점: Refresh Token의 탈취 가능성
+Refresh Token은 보안성을 높이는 중요한 역할을 하지만, 여전히 브라우저 저장소에 보관될 때 탈취될 가능성이 있습니다. 만약 Refresh Token이 유출된다면 공격자는 이를 사용해 무제한으로 Access Token을 발급받아 사용자 정보에 접근할 수 있습니다.
+
+## Refresh Token 탈취 시나리오
+### 탈취 시나리오 1
+
+
+![](/images/posts/project/LOGIN/image1.png)
+1. 클라이언트는 RT(Refresh Token) 1을 가지고 있으며, 이는 악성 클라이언트에 의해 유출되거나 도난당했습니다.
+2. 클라이언트는 RT 1을 사용하여 새로운 Refresh Token/Access Token 쌍을 얻기 위해 시도합니다.
+3. 서버는 RT 2/AT 2를 반환합니다.
+4. 악성 클라이언트는 이미 탈취한 RT 1을 사용하여 액세스 토큰을 얻으려고 시도합니다. 서버는 RT 1이 재사용되고 있음을 인식하고 RT 2를 포함한 (Refresh Token family) RT 2 토큰 계열을 즉시 무효화합니다.
+5. 그리고 서버는 악성 클라이언트에 대한 액세스 거부 응답을 반환합니다.
+6. AT 2는 4번에서 만료되고 클라이언트가 RT 2를 사용하여 새 토큰 쌍을 요청하려고 시도합니다. 하지만 서버는 클라이언트에게도 액세스 거부 응답을 반환합니다.
+### 탈취 시나리오 2
+또 다른 예는 클라이언트가 RT 1을 사용하려고 시도하기 전에 악의적인 클라이언트가 RT 1을 훔치고 이를 사용하여 AT을 획득하는 데 성공하는 경우입니다.
+![](/images/posts/project/LOGIN/image2.png)
+
+1. 악성 클라이언트가 RT(1)을 탈취한다.
+2. 악성 클라이언트가 RT(1)으로 AT를 요청한다.
+3. AT(2)와 RT(2)가 악성 클라이언트에게 반환된다(성공).
+4. RT(1)가 무효화되고, 클라이언트가 무효화된 RT(1)으로 AT를 요청한다.
+5. 재사용이 감지되어 RT Family가 무효화 된다. 서버는 클라이언트에게 Access Denied 응답한다.
+6. 악성 클라이언트가 RT(2)로 AT를 요청한다.
+7. 모든 RT가 무효화되었으므로 서버는 Access Denied를 응답한다.
+
+이 경우 Access Token의 유효기간을 최대한 짧게 유지하는 것이 중요합니다. Access Token이 만료되어야 사용자가 다시 Refresh Token을 사용할 것이기 때문입니다.
+
+### Access Token과 Refresh Token 관리 전략 계획
+Access Token을 굳이 브라우저의 로컬 스토리지나 쿠키에 오랜 기간 저장할 필요는 없습니다. 대신 자바스크립트 내부의 변수로 관리하는 것이 보안적으로 더 안전합니다.
+한편, Refresh Token은 `httpOnly` 속성과 `Secure` 속성을 사용하여 브라우저에서 접근하지 못하도록 하고, 오직 서버에서만 관리할 수 있도록 설정합니다.
+Access Token을 재발급할 때 Refresh Token도 함께 재발급한다.
+로그인 성공 시에는 전역 상태로 isLogin을 관리하여, 사용자가 로그인 상태인지 아닌지에 따라 다른 처리를 할 수 있습니다.
+
+#### 처리할 Access Token 발급, 재발급 케이스
+1. 처음 로그인
+ 	- accessToken, refreshToken 발급
+2. accessToken이 만료됐을 때
+	- refreshToken 유효함 : accessToken, refreshToken 재발급
+    - refreshToken 만료됨 : 로그아웃 처리
+3. 페이지 리로드 또는 앱 처음 실행 시
+	- refreshToken 유효함 : accessToken, refreshToken 재발급
+    - refreshToken 만료됨 : 로그아웃 처리
+
+
+## 코드 적용 (RTK-Qurey 라이브러리 사용)
+
+#### 1) 처음 로그인
+해당 코드는 간단한 로그인 코드이기 때문에 따로 작성하지 않겠습니다.
+
+#### 2) accessToken이 만료됐을 때
+Access Token이 만료된 상황은 인증이 필요한 요청에서 발생합니다. 이때 서버는 만료된 Access Token을 받고 401 Unauthorized 에러를 반환합니다. 프론트엔드에서는 이 에러를 감지하여, Access Token 재발급 요청을 보내 로그인 상태를 연장해야 합니다.
+
+이 기능은 RTK-query에서 이미 제공하고 있어, 이를 간편하게 사용할 수 있습니다.
+[RTK-Qurey 공식문서_Automatic re-authorization](https://redux-toolkit.js.org/rtk-query/usage/customizing-queries#automatic-re-authorization-by-extending-fetchbasequery) 공식문서에서 확인할 수 있습니다.
+
+```js
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions);
+  if (result.error && result.error.status === 401) {
+    setAccessToken(null);
+
+    // token 재발급 API 호출
+    const refreshResult = (await baseQuery(
+      API_PATH.USER.GET_REFRESH_ACCESS_TOKEN,
+      api,
+      extraOptions
+    )) as { data?: { data: { accessToken: string } } };
+
+    if (refreshResult.data) {
+      // 새 accessToken을 설정
+      setAccessToken(refreshResult.data.data.accessToken);
+
+      // 원래 요청을 재시도
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      // 토큰 갱신 실패 시, 사용자 로그아웃 처리 등 추가적인 처리를 여기에 추가할 수 있음
+      // alert('로그인이 만료되었습니다');
+      setAccessToken(null);
+      api.dispatch(setIsLogin(false));
+    }
+  }
+  return result;
+};
+```
+
+
+#### 3) 페이지 리로드 또는 앱 처음 실행 될 때
+```js
+App.tsx
+//App.tsx은 앱 처음 실행 시 한 번만 렌더링 되므로, 새로고침 시 첫 access token 재발급에 적합합니다.
+
+function App() {
+
+ const [isReady, setIsReady] = useState(false); // 렌더링 준비 상태
+
+// AccessToken 재발급 api
+  const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
+
+  useEffect(() => {
+    // API 호출이 완료될 때까지 기다림
+    if (!isLoading) {
+      if (isSuccess) {
+        //AccessToken 재발급 성공 시 isLogin 상태 변경
+        dispatch(setIsLogin(true));
+      }
+      setIsReady(true); // 모든 작업이 완료되었음을 표시
+    }
+  }, [isSuccess, isLoading, dispatch]);
+
+  // 나머지 코드
+}
+```
+
+
+>
+참고자료
+- [프론트에서 안전하게 로그인 처리하기 ](https://velog.io/@yaytomato/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%90%EC%84%9C-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0)
+- [인증과 인가를 안전하게 처리하기 (Refresh Token Rotation)](https://velog.io/@chchaeun/%EC%9D%B8%EC%A6%9D%EA%B3%BC)
+- [Refresh Token Rotation - Auth0 by Okta](https://auth0.com/docs/secure/tokens/refresh-tokens/refresh-token-rotation#maintain-user-sessions-in-spas)
+- [RTK Qurey 공식문서](https://redux-toolkit.js.org/rtk-query/overview)
