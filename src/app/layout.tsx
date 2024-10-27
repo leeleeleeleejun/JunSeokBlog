@@ -7,6 +7,7 @@ import MailIcon from "@/assets/MailIcon.svg";
 import VelogIcon from "@/assets/VelogIcon.svg";
 import Header from "@/components/Header";
 import {ThemeProvider} from "@/components/ThemeProvider";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,8 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
     <body className={`${inter.className} dark:bg-darkModeBG dark:text-[white]`}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+    <Analytics/>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
         <Header/>
         <main className="max-w-[900px] min-h-[500px] m-auto p-[10px]">
           {children}
