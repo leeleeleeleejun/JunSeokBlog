@@ -47,6 +47,7 @@ export default function RootLayout({
         <footer className="flex flex-col mt-[150px] py-[30px] text-xs text-gray-400">
           <nav className="flex justify-center">
             <Link
+              aria-label="GitHub profile"
               href="https://github.com/leeleeleeleejun"
               target="_blank"
               className="mx-[7px]"
@@ -54,6 +55,7 @@ export default function RootLayout({
               <GitHubIcon/>
             </Link>
             <Link
+              aria-label="Send email"
               href="mailto:wnstjr6293@gmail.com"
               target="_blank"
               className="mx-[7px]"
@@ -61,6 +63,7 @@ export default function RootLayout({
               <MailIcon/>
             </Link>
             <Link
+              aria-label="Velog blog"
               href="https://velog.io/@leeleeleeleejun"
               target="_blank"
               className="mx-[7px]"

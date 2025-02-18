@@ -23,11 +23,12 @@ export default function ThemeToggle() {
 
   return (
     <button
+      aria-label={currentTheme === 'dark' ? 'Activate light mode' : 'Activate dark mode'}
       onClick={() => {
-        setTheme( currentTheme === 'dark' ? 'light' : 'dark')
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
       }}
     >
-      {currentTheme === "light" ? <LightIcon /> : <DarkIcon />}
+      {currentTheme === 'light' ? <LightIcon/> : <DarkIcon/>}
     </button>
   );
 }
