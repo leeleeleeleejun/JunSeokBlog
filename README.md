@@ -6,6 +6,29 @@ Next.js를 이용한 SSG(Static Site Generation) 마크다운 블로그 입니�
 
 <a href='https://junseok-blog.vercel.app/'>JunSeok-blog</a>
 
+## 실행 방법
+
+**요구 사항:** Node.js 24.x
+
+```bash
+# 의존성 설치
+npm install
+
+# 개발 서버 실행 (http://localhost:3000)
+npm run dev
+
+# 프로덕션 빌드 후 실행
+npm run build
+npm start
+```
+
+| 명령어          | 설명                             |
+| --------------- | -------------------------------- |
+| `npm run dev`   | 개발 모드로 로컬 서버 실행       |
+| `npm run build` | 정적 사이트 생성(SSG) 빌드       |
+| `npm start`     | 빌드 결과물로 프로덕션 서버 실행 |
+| `npm run lint`  | ESLint 검사                      |
+
 ## 기술 스택, 기술 선정 이유
 
 <img src='./public/images/Next-js.jpg' width=100 >

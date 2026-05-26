@@ -4,12 +4,18 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const isActive = pathname.startsWith("/about") ? "About" : "Home";
   const [position, setPosition] = useState<number>(0);
   const [visible, setVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    router.push("/about");
+  }, []);
 
   useEffect(() => {
     let timer: NodeJS.Timeout | null;

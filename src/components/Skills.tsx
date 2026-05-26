@@ -5,14 +5,16 @@ export default function Skills() {
   const Framework = ["Next.js"];
   const library = [
     "React",
-    "Redux Toolkit",
+    "Zustand",
     "React-Query",
     "styled-components",
     "tailwindcss",
   ];
   return (
     <div className="mt-[50px]">
-      <h3 className="text-h3 font-semibold">Skills</h3>
+      <h3 className="text-h3 font-semibold border-b border-gray-200 mb-2">
+        Skills
+      </h3>
       <ul className="flex my-[20px] flex-wrap">
         {language.map((item, index) => (
           <li key={item + index}>
