@@ -1,7 +1,7 @@
 "use client";
 
 import { layout, prepare } from "@chenglou/pretext";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const FONT = "400 14px Inter, ui-sans-serif, system-ui, sans-serif";
 const LINE_HEIGHT = 20;
@@ -18,8 +18,9 @@ export default function PretextDescription({
   maxLines,
 }: PretextDescriptionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
-  const prepared = useMemo(() => prepare(text, FONT), [text]);
+  const [minHeight, setMinHeight] = useState<number | undefined>(() =>
+    maxLines != null ? maxLines * LINE_HEIGHT : undefined
+  );
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -29,6 +30,7 @@ export default function PretextDescription({
       const width = el.offsetWidth;
       if (width <= 0) return;
 
+      const prepared = prepare(text, FONT);
       const { height } = layout(prepared, width, LINE_HEIGHT);
       const reservedHeight =
         maxLines != null ? maxLines * LINE_HEIGHT : height;
@@ -42,7 +44,7 @@ export default function PretextDescription({
     observer.observe(el);
 
     return () => observer.disconnect();
-  }, [prepared, maxLines]);
+  }, [text, maxLines]);
 
   const clampClass = maxLines === 2 ? "line-clamp-2" : "";
 

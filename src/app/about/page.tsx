@@ -574,7 +574,7 @@ function TechInterests() {
             {/* 기업 소개 */}
             <div className=" leading-relaxed space-y-4 mb-8">
               <p>
-                토스는 <strong>'금융의 모든 순간을 쉽고 간편하게'</strong>라는
+                토스는 <strong>&apos;금융의 모든 순간을 쉽고 간편하게&apos;</strong>라는
                 슬로건 아래, 아주 복잡한 금융 절차를 매끄러운 UX로 풀어내는 데
                 집중합니다.
               </p>
@@ -681,7 +681,7 @@ function TechInterests() {
             {/* 기업 소개 */}
             <div className="leading-relaxed space-y-4 mb-8">
               <p>
-                당근은 <strong>'당신 근처'</strong>이라는 슬로건 아래, 지역
+                당근은 <strong>&apos;당신 근처&apos;</strong>이라는 슬로건 아래, 지역
                 기반의 하이퍼로컬 커뮤니티 서비스를 통해 이웃 간의 연결을
                 혁신합니다.
               </p>
