@@ -3,6 +3,7 @@ import ActivitiesAccordion from "@/components/ActivitiesAccordion";
 import PretextDescription from "@/components/PretextDescription";
 import Skills from "@/components/Skills";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "JunSeok-blog",
@@ -653,6 +654,9 @@ function TechInterests() {
                 </div>
               </div>
             </div>
+            <div className=" mt-1 bg-white border border-gray-100 rounded-xl p-6 shadow-sm text-sm">
+              <Image src={'/images/about/toss.png'} alt={'토스'} width={600} height={100} className="w-full h-auto" />
+            </div>
           </section>
           <section>
             {/* 기업 헤더 */}
@@ -757,6 +761,11 @@ function TechInterests() {
                 </div>
               </div>
             </div>
+
+            <div className=" mt-1 bg-white border border-gray-100 rounded-xl p-6 shadow-sm text-sm">
+              <Image src={'/images/about/danngn.png'} alt={'당근'} width={600} height={100} className="w-full h-auto" />
+            </div>
+
           </section>
         </div>
       </div>
